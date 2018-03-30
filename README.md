@@ -19,7 +19,11 @@ the game "Would you rather". The user can also see what other users have answere
 
 ## Tech stack
 The project is built using the MERN-stack
+
 **Database**: MongoDB + mongoose.js
+
 **Backend framework**: Express.js
+
 **Frontend framework**: React + Redux, d3js
+
 **Backend environment**: node.js

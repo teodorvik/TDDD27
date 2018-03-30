@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import Question from './Question';
 
 import './style.scss';
 
@@ -8,9 +9,8 @@ import reactIcon from './assets/images/logo.png';
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <img src={reactIcon} />
-        <h1>Hello React!</h1>
+      <div className='wrapper'>
+        <Question />
       </div>
     );
   }

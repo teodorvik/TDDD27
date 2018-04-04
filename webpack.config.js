@@ -4,10 +4,14 @@ const { resolve } = require('path');
 // Plugins
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-const config = () => ({
+const config = {
+  mode: 'development',
   context: resolve(__dirname, 'client'),
-  entry: './app.jsx',
+  entry: {
+    client: './app.jsx'
+  },
   output: {
     path: resolve(__dirname, 'build'),
     filename: '[name].bundle.js'
@@ -44,7 +48,12 @@ const config = () => ({
         // JSX and JS
         test: /\.(jsx|js)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ["react", "env"]
+          }
+        }
       },
       {
         // HTML
@@ -53,17 +62,13 @@ const config = () => ({
       }
     ]
   },
+  devtool: 'inline-source-map',
   resolve: {
-    // import('Component.jsx') can now be written like import('Component')
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    new CleanWebpackPlugin(['build']),
-    new HtmlWebpackPlugin({ template: 'index.html' })
-  ],
-  devServer: {
-    contentBase: "./build"
-  }
-});
+    new CleanWebpackPlugin(['build'])
+  ]
+};
 
 module.exports = config;

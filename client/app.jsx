@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Question from './Question';
 
 import './style.scss';
 
-import reactIcon from './assets/images/logo.png';
-
-class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
-      <div className='wrapper'>
+      <div>
+        <header>Wyrv -Would you rather visualized</header>
         <Question />
+        <div className='d3js-canvas'>
+          <h1>d3js</h1>
+        </div>
       </div>
     );
   }
 }
 
-render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('root'));

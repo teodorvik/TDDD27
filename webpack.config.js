@@ -3,8 +3,7 @@ const { resolve } = require('path');
 
 // Plugins
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
+//  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   mode: 'development',

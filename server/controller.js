@@ -1,21 +1,31 @@
 const Question = require('./models/question');
+const Answer   = require('./models/answer');
 
 function getQuestions(req, res) {
-    Question.find({}, function (err, questions) {
-        if(err) {
-            res.send("Something went wrong!!");
-            next();
+    Question.find().exec((err, questions) => {
+        if (err) {
+            res.status(500).send(err);
         }
 
-        res.json(questions);
+        res.json({ questions });
     });
 };
 
 function getQuestion(req, res) {
-    res.send("hej2");
+    Post.findOne({ cuid: req.params.cuid }).exec((err, question) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json({ question });
+    });
 };
 
 function addQuestion(req, res) {
+    if (!req.body.question.text || !req.body.question.options || !req.body.question.options.length < 2) {
+        res.status(403).end();
+    }
+
+    //TODO(Aron) connect question to user. Check if user is allowed to add questions.
 
     const newQuestion = new Question(req.body.question);
     newQuestion.save((err, saved) => {
@@ -27,23 +37,66 @@ function addQuestion(req, res) {
 };
 
 function deleteQuestion(req, res) {
-    res.send("hej4");
+
+    //TODO(Aron) connect question to user. Check if user is allowed to delete questions.
+
+    Question.findOne({ cuid: req.params.cuid }).exec((err, question) => {
+        if (err) {
+        res.status(500).send(err);
+            }
+            question.remove(() => {
+            res.status(200).end();
+        });
+    });
 };
 
 function getAnswers(req, res) {
-    res.send("hej5");
+    Answer.find().exec((err, answers) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+
+        res.json({ answers });
+    });
 };
 
 function getAnswer(req, res) {
-    res.send("hej6");
+    Post.findOne({ cuid: req.params.cuid }).exec((err, answer) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json({ answer });
+    });
 };
 
 function addAnswer(req, res) {
-    res.send("hej7");
+    if (!req.body.answer.questionid || !req.body.answer.option) {
+        res.status(403).end();
+    }
+
+    //TODO(Aron) connect answer to user. Check if user is allowed to add answers.
+
+    const newAnswer = new Answer(req.body.answer);
+    newAnswer.save((err, saved) => {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json({ answer: saved });
+    });
 };
 
 function deleteAnswer(req, res) {
-    res.send("hej8");
+
+    //TODO(Aron) connect answer to user. Check if user is allowed to delete answers.
+
+    Answer.findOne({ cuid: req.params.cuid }).exec((err, answer) => {
+        if (err) {
+        res.status(500).send(err);
+            }
+            answer.remove(() => {
+            res.status(200).end();
+        });
+    });
 };
 
 module.exports = {

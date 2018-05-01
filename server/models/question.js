@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-var questionSchema = mongoose.Schema({
+var answerSchema = mongoose.Schema({
     cuid: String,
-    text: String,
-    options: [String]
+    userid: String,
+    questionid: String,
+    option: Number
 });
 
-module.exports = mongoose.model('Question', questionSchema);
+module.exports = mongoose.model('Answer', answerSchema);

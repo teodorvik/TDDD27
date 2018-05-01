@@ -31,7 +31,7 @@ class CreateQuestion extends Component {
 
     submitQuestion() {
         const { addQuestion } = this.props;
-        addQuestion(this.state);
+        addQuestion({ question: this.state });
     }
 
     render() {

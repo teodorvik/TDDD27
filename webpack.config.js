@@ -9,7 +9,7 @@ const config = {
   mode: 'development',
   context: resolve(__dirname, 'client'),
   entry: {
-    client: './app.jsx'
+    client: './App.jsx'
   },
   output: {
     path: resolve(__dirname, 'build'),
@@ -50,7 +50,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ["react", "env"]
+            presets: ["react", "env", "stage-1"]
           }
         }
       },

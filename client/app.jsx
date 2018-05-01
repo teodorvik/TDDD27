@@ -1,19 +1,43 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Question from './Question';
+import { createStore,applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Question from './views/question/containers/QuestionContainer';
+import CreateQuestion from './views/create';
 
 import './style.scss';
+
+import rootReducers from './rootReducers';
+const store = createStore(rootReducers, applyMiddleware(thunk));
 
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <header>Wyrv -Would you rather visualized</header>
-        <Question />
-        <div className='d3js-canvas'>
-          <h1>d3js</h1>
-        </div>
-      </div>
+      <Provider store={store}>
+        <MuiThemeProvider>
+          <div>
+            <header>Wyrv - Would you rather visualized</header>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path='/' render={() => (
+                  <React.Fragment>
+                    {/* <Filter /> */}
+                    <Question />
+                    <div className='d3js-canvas'>
+                      <h1>d3js</h1>
+                    </div>
+                  </React.Fragment>
+                )} />
+                <Route exact path='/profile' render={() => <h1>Profile</h1>} />
+                <Route exact path='/create' component={CreateQuestion} />
+              </Switch>
+            </BrowserRouter>
+          </div>
+        </MuiThemeProvider>
+      </Provider>
     );
   }
 }

@@ -1,0 +1,14 @@
+.question {
+    box-sizing: border-box;
+    padding: 40px;
+
+    & > h1 {
+        margin-top: 0;
+    }
+
+    .question__header {}
+
+    .question__options {
+        display: flex;
+    }
+}

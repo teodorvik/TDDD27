@@ -11,7 +11,7 @@ const compiler = webpack(config);
 const port = 3000;
 const server = express();
 
-const birds = require('./birds');
+// const birds = require('./birds');
 
 server.use(
     webpackDevMiddleware(compiler, {
@@ -20,7 +20,7 @@ server.use(
     })
 );
 
-server.use('/birds', birds);
+// server.use('/birds', birds);
 
 server.listen(port, (error) => {
     if (error) {
@@ -30,6 +30,6 @@ server.listen(port, (error) => {
     }
 });
 
-server.get('/', function (req, res) {
+server.get(/\//, function (req, res) {
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });

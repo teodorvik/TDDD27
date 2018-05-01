@@ -21,6 +21,7 @@ function getQuestion(req, res) {
 };
 
 function addQuestion(req, res) {
+    console.log("Endpoint", req);
     if (!req.body.question.text || !req.body.question.options || !req.body.question.options.length < 2) {
         res.status(403).end();
     }

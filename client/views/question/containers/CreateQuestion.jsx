@@ -8,7 +8,7 @@ class CreateQuestion extends Component {
         super(props);
 
         this.state = {
-            question: 'Would you rather...?',
+            text: 'Would you rather...?',
             options: ["", ""]
         }
 
@@ -26,20 +26,19 @@ class CreateQuestion extends Component {
     }
 
     updateQuestionValue(event, newValue) {
-        this.setState({ question: newValue });
+        this.setState({ text: newValue });
     }
 
     submitQuestion() {
-        console.log("Submit the data!", this.state);
         const { addQuestion } = this.props;
         addQuestion(this.state);
     }
 
     render() {
-        const { question, options } = this.state;
+        const { text, options } = this.state;
 
         const formProps = {
-            question,
+            question: text,
             options,
             updateQuestionValue: this.updateQuestionValue,
             updateOptionValue: this.updateOptionValue,

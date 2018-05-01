@@ -43,6 +43,6 @@ server.listen(port, (error) => {
 });
 
 // Frontend route
-server.get(/\//, function (req, res) {
+server.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });

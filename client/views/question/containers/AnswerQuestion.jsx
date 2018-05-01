@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from '../components/Question';
-import { getQuestionsAction } from '../actions/questionActions';
+import { getQuestionsAction } from '../actions/getActions';
 
 import '../styles/question.scss';
 
-export class QuestionContainer extends Component {
+export class AnswerQuestion extends Component {
     constructor(props) {
         super(props);
 
@@ -63,4 +63,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AnswerQuestion);

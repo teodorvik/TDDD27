@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { createStore,applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Question from './views/question/containers/QuestionContainer';
-import CreateQuestion from './views/create';
+import Question from './views/question/containers/AnswerQuestion';
+import CreateQuestion from './views/question/containers/CreateQuestion';
 
 import './style.scss';
 
@@ -25,6 +25,7 @@ export default class App extends Component {
                 <Route exact path='/' render={() => (
                   <React.Fragment>
                     {/* <Filter /> */}
+                    <CreateQuestion />
                     <Question />
                     <div className='d3js-canvas'>
                       <h1>d3js</h1>
@@ -32,7 +33,6 @@ export default class App extends Component {
                   </React.Fragment>
                 )} />
                 <Route exact path='/profile' render={() => <h1>Profile</h1>} />
-                <Route exact path='/create' component={CreateQuestion} />
               </Switch>
             </BrowserRouter>
           </div>

@@ -1,4 +1,5 @@
 const Question = require('./models/question');
+const Answer   = require('./models/answer');
 
 function getQuestions(req, res) {
     Question.find().exec((err, questions) => {
@@ -69,7 +70,7 @@ function getAnswer(req, res) {
 };
 
 function addAnswer(req, res) {
-    if (!req.body.answer.text || !req.body.answer.options || !req.body.answer.options.length < 2) {
+    if (!req.body.answer.questionid || !req.body.answer.option) {
         res.status(403).end();
     }
 

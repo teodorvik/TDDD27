@@ -1,5 +1,4 @@
 const Question = require('./models/question');
-const Answer   = require('./models/answer');
 
 function getQuestions(req, res) {
     Question.find().exec((err, questions) => {
@@ -7,7 +6,7 @@ function getQuestions(req, res) {
             res.status(500).send(err);
         }
 
-        res.json({ questions });
+        res.json(questions);
     });
 };
 
@@ -21,8 +20,7 @@ function getQuestion(req, res) {
 };
 
 function addQuestion(req, res) {
-    console.log("Endpoint", req);
-    if (!req.body.question.text || !req.body.question.options || !req.body.question.options.length < 2) {
+    if (!req.body.question.text || !req.body.question.options || req.body.question.options.length < 2) {
         res.status(403).end();
     }
 

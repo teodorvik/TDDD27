@@ -3,6 +3,7 @@ const express              = require('express');
 const path                 = require('path');
 const webpack              = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const bodyParser           = require('body-parser')
 
 // Settings
 const config   = require('../webpack.config');
@@ -30,7 +31,10 @@ db.once('open', function () {
 });
 
 // Setup API
+
 const routes = require('./routes');
+server.use(bodyParser.json({ limit: '20mb' }));
+server.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 server.use('/api', routes);
 
 // Start server

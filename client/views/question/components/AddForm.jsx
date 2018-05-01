@@ -6,12 +6,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/create-question.scss';
 
-const AddForm = ({ question, options, updateQuestionValue, updateOptionValue, submitQuestion }) => (
+const AddForm = ({ text, options, updateQuestionValue, updateOptionValue, submitQuestion }) => (
     <div className='create-question-form'>
         <h1>Create new question</h1>
         <TextField
             floatingLabelText='Question'
-            value={question}
+            value={text}
             onChange={updateQuestionValue}
             fullWidth={true}
         />

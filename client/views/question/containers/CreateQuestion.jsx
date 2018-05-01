@@ -38,7 +38,7 @@ class CreateQuestion extends Component {
         const { text, options } = this.state;
 
         const formProps = {
-            question: text,
+            text,
             options,
             updateQuestionValue: this.updateQuestionValue,
             updateOptionValue: this.updateOptionValue,

@@ -9,21 +9,6 @@ export class AnswerQuestion extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            question: {
-                options: [
-                    {
-                        id: 1,
-                        text: 'give up bathing for a month'
-                    },
-                    {
-                        id: 2,
-                        text: 'give up the internet for a month'
-                    }
-                ]
-            }
-        }
-
         this.selectOption = this.selectOption.bind(this);
     }
 
@@ -37,22 +22,26 @@ export class AnswerQuestion extends Component {
     }
 
     render() {
-        const { options } = this.state.question;
-        const { questions } = this.props;
-        console.log("Questions", questions);
-
-        return (
-            <Question options={options} selectOption={this.selectOption} />
-        );
+        const { question } = this.props;
+        if (typeof question !== "undefined") {
+            return (
+                <Question {...question} selectOption={this.selectOption} />
+            );
+        }
+        return null;
     }
 }
 
 const mapStateToProps = state => {
-    const { questions } = state;
-
-    return {
-        questions
+    const {questions} = state;
+    if (typeof questions !== "undefined") {
+        const randNr = Math.floor(Math.random() * questions.length);
+        return {
+            question: questions[randNr]
+        }
     }
+
+    return {};
 }
 
 const mapDispatchToProps = dispatch => {

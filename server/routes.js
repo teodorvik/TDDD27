@@ -8,14 +8,15 @@ router.use(function timeLog (req, res, next) {
   next();
 });
 
-router.get(    '/questions',       controller.getQuestions);
-router.get(    '/questions/:cuid', controller.getQuestion);
-router.post(   '/questions/',      controller.addQuestion);
-router.delete( '/questions/:cuid', controller.deleteQuestion);
+router.get(    '/questions',        controller.getQuestions);
+router.get(    '/questions/:cuid',  controller.getQuestion);
+router.get(    '/questions/random', controller.getRandomQuestion);
+router.post(   '/questions/',       controller.addQuestion);
+router.delete( '/questions/:cuid',  controller.deleteQuestion);
 
-router.get(    '/answers',         controller.getAnswers);
-router.get(    '/answers/:cuid',   controller.getAnswer);
-router.post(   '/answers/',        controller.addAnswer);
-router.delete( '/answers/:cuid',   controller.deleteAnswer);
+router.get(    '/answers',          controller.getAnswers);
+router.get(    '/answers/:cuid',    controller.getAnswer);
+router.post(   '/answers/',         controller.addAnswer);
+router.delete( '/answers/:cuid',    controller.deleteAnswer);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AddForm from '../components/AddForm';
-import { addQuestionAction } from '../actions/addActions';
+import { addQuestionAction } from '../actions/addQuestionActions';
 
 class CreateQuestion extends Component {
     constructor(props) {

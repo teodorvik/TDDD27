@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
-import { questions } from './views/question/reducers/questionReducer';
+import { questions, currentQuestion } from './views/question/reducers/questionReducer';
 
-export default questions;
+export default combineReducers({
+    questions,
+    currentQuestion
+});

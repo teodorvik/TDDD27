@@ -5,8 +5,9 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Question from './views/question/containers/AnswerQuestion';
+import AnswerQuestion from './views/question/containers/AnswerQuestion';
 import CreateQuestion from './views/question/containers/CreateQuestion';
+import QuestionListing from './views/question/containers/QuestionListing';
 
 import './style.scss';
 
@@ -26,7 +27,8 @@ export default class App extends Component {
                   <React.Fragment>
                     {/* <Filter /> */}
                     <CreateQuestion />
-                    <Question />
+                    <AnswerQuestion />
+                    <QuestionListing />
                     <div className='d3js-canvas'>
                       <h1>d3js</h1>
                     </div>

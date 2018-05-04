@@ -1,35 +1,42 @@
 import React from 'react';
 
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
+
 const Listing = ({ questions }) => {
     if(typeof questions === 'undefined') {
         return <p>No questions</p>
     }
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Question</th>
-                    <th>Option 1</th>
-                    <th>Option 2</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table>
+            <TableHeader adjustForCheckbox={false}>
+                <TableRow>
+                    <TableHeaderColumn>Question</TableHeaderColumn>
+                    <TableHeaderColumn></TableHeaderColumn>
+                    <TableHeaderColumn>Option 2</TableHeaderColumn>
+                </TableRow>
+            </TableHeader>
+            <TableBody stripedRows={true}>
                 {
-                    questions.map(question => <TableRow key={question.cuid} question={question} />)
+                    questions.map(question => <Row key={question._id} {...question} />)
                 }
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
     );
 }
 
-const TableRow = ({ text, options, cuid }) => (
-    <tr>
-        <td>{text}</td>
-        <td>{options[0]}</td>
-        <td>{options[1]}</td>
-        <td>{cuid}</td>
-    </tr>
+const Row = ({ text, options, cuid }) => (
+    <TableRow>
+        <TableRowColumn>{text.replace(/(\.\.\.\?)/g, '')} {options[0]} or {options[1]}</TableRowColumn>
+        <TableRowColumn>{Math.floor(Math.random() * 100)} | {Math.floor(Math.random() * 100)}</TableRowColumn>
+        <TableRowColumn>{options[1]}</TableRowColumn>
+    </TableRow>
 )
 
 export default Listing;

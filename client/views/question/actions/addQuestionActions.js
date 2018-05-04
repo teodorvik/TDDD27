@@ -4,7 +4,7 @@ import {
     ADD_QUESTION_FAILED
 } from './actionConstants';
 
-import { addQuestion } from '../services/api';
+import { addQuestionCall } from '../services/api';
 
 export const addQuestionRequest = () => ({
     type: ADD_QUESTION_REQUEST
@@ -24,7 +24,7 @@ export const addQuestionAction = (question) => {
     return (dispatch) => {
         dispatch(addQuestionRequest());
 
-        addQuestion(question)
+        addQuestionCall(question)
             .then(response => dispatch(addQuestionSuccess(response)))
             .catch(error => dispatch(addQuestionFailed(error)));
     }

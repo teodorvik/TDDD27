@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from '../components/Question';
-import { getQuestionsAction } from '../actions/getActions';
+import { getRandomQuestionAction } from '../actions/getRandomQuestionActions';
 
 import '../styles/question.scss';
 
@@ -17,13 +17,14 @@ export class AnswerQuestion extends Component {
     }
 
     componentDidMount() {
-        const { getQuestions } = this.props;
-        getQuestions();
+        const { getRandomQuestion } = this.props;
+        getRandomQuestion();
     }
 
     render() {
         const { question } = this.props;
-        if (typeof question !== "undefined") {
+        console.log(question);
+        if (question && question.options) {
             return (
                 <Question {...question} selectOption={this.selectOption} />
             );
@@ -33,23 +34,19 @@ export class AnswerQuestion extends Component {
 }
 
 const mapStateToProps = state => {
-    const {questions} = state;
-    if (typeof questions !== "undefined") {
-        const randNr = Math.floor(Math.random() * questions.length);
-        return {
-            question: questions[randNr]
-        }
-    }
+    const { currentQuestion } = state;
 
-    return {};
-}
+    return {
+        question: currentQuestion
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-        getQuestions: () => (
-            dispatch(getQuestionsAction())
+        getRandomQuestion: () => (
+            dispatch(getRandomQuestionAction())
         )
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerQuestion);

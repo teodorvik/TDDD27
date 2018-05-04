@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import QuestionListing from '../components/Listing';
-import { getQuestionsAction } from '../actions/getActions';
+import Listing from '../components/Listing';
+import { getQuestionsAction } from '../actions/getQuestionsActions';
 
-export default class QuestionListing extends Component {
+import '../styles/question-listing.scss';
+
+class QuestionListing extends Component {
     constructor(props) {
         super(props);
     }
@@ -17,14 +19,14 @@ export default class QuestionListing extends Component {
         const { questions } = this.props;
 
         return (
-            <QuestionListing questions={questions} />
+            <Listing questions={questions} />
         )
     }
 }
 
 const mapStateToProps = state => {
     const { questions } = state;
-
+    console.log(state);
     return {
         questions
     };
@@ -32,7 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     getQuestions: () => {
-        dispatch(getQuestionAction());
+        dispatch(getQuestionsAction());
     }
 });
 

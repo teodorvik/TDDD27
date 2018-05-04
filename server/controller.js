@@ -11,11 +11,24 @@ function getQuestions(req, res) {
 };
 
 function getQuestion(req, res) {
-    Post.findOne({ cuid: req.params.cuid }).exec((err, question) => {
+    Question.findOne({ cuid: req.params.cuid }).exec((err, question) => {
         if (err) {
             res.status(500).send(err);
         }
         res.json({ question });
+    });
+};
+
+function getRandomQuestion(req, res) {
+    Question.count().exec((err, count) => {
+        var random = Math.floor(Math.random() * count);
+
+        Question.findOne().skip(random).exec((err, question) => {
+            if (err) {
+                res.status(500).send(err);
+            }
+            res.json({ question });
+        });
     });
 };
 
@@ -41,9 +54,9 @@ function deleteQuestion(req, res) {
 
     Question.findOne({ cuid: req.params.cuid }).exec((err, question) => {
         if (err) {
-        res.status(500).send(err);
-            }
-            question.remove(() => {
+            res.status(500).send(err);
+        }
+        question.remove(() => {
             res.status(200).end();
         });
     });
@@ -90,9 +103,9 @@ function deleteAnswer(req, res) {
 
     Answer.findOne({ cuid: req.params.cuid }).exec((err, answer) => {
         if (err) {
-        res.status(500).send(err);
-            }
-            answer.remove(() => {
+            res.status(500).send(err);
+        }
+        answer.remove(() => {
             res.status(200).end();
         });
     });
@@ -101,6 +114,7 @@ function deleteAnswer(req, res) {
 module.exports = {
     getQuestions,
     getQuestion,
+    getRandomQuestion,
     addQuestion,
     deleteQuestion,
 

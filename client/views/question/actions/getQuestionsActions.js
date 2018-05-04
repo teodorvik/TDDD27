@@ -1,10 +1,10 @@
 import {
     GET_QUESTIONS_REQUEST,
     GET_QUESTIONS_SUCCESS,
-    GET_QUESTIONS_FAILED
+    GET_QUESTIONS_FAILED,
 } from './actionConstants';
 
-import { fetchQuestions } from '../services/api';
+import { getQuestionsCall } from '../services/api';
 
 export const getQuestionsRequest = () => ({
     type: GET_QUESTIONS_REQUEST
@@ -24,8 +24,8 @@ export const getQuestionsAction = () => {
     return (dispatch) => {
         dispatch(getQuestionsRequest());
 
-        fetchQuestions()
+        getQuestionsCall()
             .then(response => dispatch(getQuestionsSuccess(response)))
             .catch(error => dispatch(getQuestionsFailed(error)));
     }
-}
+};

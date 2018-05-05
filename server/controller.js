@@ -11,7 +11,7 @@ function getQuestions(req, res) {
 };
 
 function getQuestion(req, res) {
-    Question.findOne({ cuid: req.params.cuid }).exec((err, question) => {
+    Question.findOne({ id: req.params.id }).exec((err, question) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -52,7 +52,7 @@ function deleteQuestion(req, res) {
 
     //TODO(Aron) connect question to user. Check if user is allowed to delete questions.
 
-    Question.findOne({ cuid: req.params.cuid }).exec((err, question) => {
+    Question.findOne({ id: req.params.id }).exec((err, question) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -73,7 +73,7 @@ function getAnswers(req, res) {
 };
 
 function getAnswer(req, res) {
-    Post.findOne({ cuid: req.params.cuid }).exec((err, answer) => {
+    Post.findOne({ id: req.params.id }).exec((err, answer) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -99,7 +99,7 @@ function deleteAnswer(req, res) {
 
     //TODO(Aron) connect answer to user. Check if user is allowed to delete answers.
 
-    Answer.findOne({ cuid: req.params.cuid }).exec((err, answer) => {
+    Answer.findOne({ id: req.params.id }).exec((err, answer) => {
         if (err) {
             res.status(500).send(err);
         }

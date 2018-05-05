@@ -1,4 +1,5 @@
 const Question = require('./models/question');
+const Answer = require('./models/answer');
 
 function getQuestions(req, res) {
     Question.find().exec((err, questions) => {

@@ -13,7 +13,7 @@ const Question = ({ _id, options, text, selectOption }) => (
 )
 
 
-const Option = ({ optionIdx, questionId, text, clickHandler }) => (
+const Option = ({ optionIdx, questionId, text, selectOption }) => (
     <RaisedButton
         label={text}
         primary={true}

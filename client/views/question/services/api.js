@@ -1,5 +1,10 @@
 const API_path = 'http://localhost:3000/api';
- 
+
+const post_headers = {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+};
+
 export const getQuestionsCall = () => (
     fetch(`${API_path}/questions`)
         .then(response => response.json())
@@ -20,8 +25,7 @@ export const getQuestionCall = id => (
 
 export const addQuestionCall = question => (
     fetch(`${API_path}/questions`, {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
+        ...post_headers,
         body: JSON.stringify(question)
     })
         .then(response => console.log(response))
@@ -29,10 +33,14 @@ export const addQuestionCall = question => (
 );
 
 export const sendAnswerCall = (questionId, optionsIdx) => (
-    fetch(`${API_path}/answers`, {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify({ questionId, optionsIdx })
+    fetch(`${API_path}/answers/`, {
+        ...post_headers,
+        body: JSON.stringify({
+            answer: {
+                questionid: questionId,
+                option: optionsIdx
+            }
+        })
     })
         .then(response => response.json())
         .catch(error => console.log(error))

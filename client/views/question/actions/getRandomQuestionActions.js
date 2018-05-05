@@ -25,6 +25,7 @@ export const getRandomQuestionAction = () => {
         dispatch(getRandomQuestionRequest());
 
         getRandomQuestionCall()
+            .then(response => response.question[0])
             .then(response => dispatch(getRandomQuestionSuccess(response)))
             .catch(error => dispatch(getRandomQuestionFailed(error)));
     };

@@ -41,12 +41,10 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getRandomQuestion: () => (
-            dispatch(getRandomQuestionAction())
-        )
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    getRandomQuestion: () => {
+        dispatch(getRandomQuestionAction())
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerQuestion);

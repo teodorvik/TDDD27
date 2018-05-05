@@ -17,7 +17,7 @@ export const getQuestionCall = id => (
         .catch(error => console.log(error))
 );
 
-export const addQuestionCall = (question) => (
+export const addQuestionCall = question => (
     fetch('http://localhost:3000/api/questions', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',

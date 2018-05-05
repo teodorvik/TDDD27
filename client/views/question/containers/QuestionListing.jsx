@@ -26,7 +26,7 @@ class QuestionListing extends Component {
 
 const mapStateToProps = state => {
     const { questions } = state;
-    console.log(state);
+
     return {
         questions
     };

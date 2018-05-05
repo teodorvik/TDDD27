@@ -22,7 +22,7 @@ function getRandomQuestion(req, res) {
     Question.count().exec((err, count) => {
         var random = Math.floor(Math.random() * count);
 
-        Question.findOne().skip(random).exec((err, question) => {
+        Question.find().limit(1).skip(random).exec((err, question) => {
             if (err) {
                 res.status(500).send(err);
             }

@@ -2,31 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from '../components/Question';
 import { getRandomQuestionAction } from '../actions/getRandomQuestionActions';
+import { sendAnswerAction } from '../actions/sendAnswerActions';
 
 import '../styles/question.scss';
 
 export class AnswerQuestion extends Component {
-    constructor(props) {
-        super(props);
-
-        this.selectOption = this.selectOption.bind(this);
-    }
-
-    selectOption(id) {
-        console.log(id);
-    }
-
     componentDidMount() {
         const { getRandomQuestion } = this.props;
         getRandomQuestion();
     }
 
     render() {
-        const { question } = this.props;
+        const { question, selectOption } = this.props;
         console.log(question);
         if (question && question.options) {
             return (
-                <Question {...question} selectOption={this.selectOption} />
+                <Question {...question} selectOption={selectOption} />
             );
         }
         return null;
@@ -43,7 +34,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     getRandomQuestion: () => {
-        dispatch(getRandomQuestionAction())
+        dispatch(getRandomQuestionAction());
+    },
+    selectOption: (questionId, optionIdx) => {
+        dispatch(sendAnswerAction(questionId, optionIdx, true));
     }
 });
 

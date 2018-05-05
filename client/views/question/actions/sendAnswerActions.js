@@ -4,6 +4,7 @@ import {
     SEND_ANSWER_FAILED
 } from './actionConstants';
 
+import { getRandomQuestionAction } from './getRandomQuestionActions';
 import { sendAnswerCall } from '../services/api';
 
 export const sendAnswerRequest = () => ({
@@ -21,12 +22,17 @@ export const sendAnswerFailed = error => ({
 });
 
 // TODO: Send parameters with call
-export const sendAnswerAction = () => {
+export const sendAnswerAction = (questionId, optionsIdx, shouldFetchNewQuestion) => {
     return (dispatch) => {
         dispatch(sendAnswerRequest());
 
-        sendAnswerCall()
-            .then(reponse => dispatch(sendAnswerSuccess(response)))
+        sendAnswerCall(questionId, optionsIdx)
+            .then(reponse => {
+                dispatch(sendAnswerSuccess(response));
+                if (shouldFetchNewQuestion) {
+                    dispatch(getRandomQuestionAction());
+                }
+            })
             .catch(error => dispatch(sendAnswerFailed(error)));
     }
 };

@@ -82,12 +82,10 @@ function getAnswer(req, res) {
 };
 
 function addAnswer(req, res) {
-    if (!req.body.answer.questionid || !req.body.answer.option) {
+    if ((!req.body.answer.questionid) || typeof req.body.answer.option === 'undefined' ) {
         res.status(403).end();
     }
-
     //TODO(Aron) connect answer to user. Check if user is allowed to add answers.
-
     const newAnswer = new Answer(req.body.answer);
     newAnswer.save((err, saved) => {
         if (err) {

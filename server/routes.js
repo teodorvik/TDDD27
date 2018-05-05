@@ -9,8 +9,8 @@ router.use(function timeLog (req, res, next) {
 });
 
 router.get(    '/questions',        controller.getQuestions);
-router.get(    '/questions/:cuid',  controller.getQuestion);
 router.get(    '/questions/random', controller.getRandomQuestion);
+router.get(    '/questions/:cuid',  controller.getQuestion);
 router.post(   '/questions/',       controller.addQuestion);
 router.delete( '/questions/:cuid',  controller.deleteQuestion);
 

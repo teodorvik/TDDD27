@@ -12,10 +12,11 @@ const Listing = ({ questions }) => {
         <table className='question-listing'>
             <thead>
                 <tr>
-                    <th>Question</th>
-                    <th className='text-right'>Votes Option 1</th>
+                    <th className='text-right'>Option 1</th>
+                    <th className='text-right'>Votes</th>
                     <th className='text-center'>Stats %</th>
-                    <th>Votes Option 2</th>
+                    <th>Votes</th>
+                    <th>Option 2</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,34 +54,28 @@ class Row extends Component {
     }
 
     render() {
-        const { text, options, comment } = this.props;
+        const { options } = this.props;
         const { data } = this.state;
 
         const styles = this.calcStyle();
 
         return (
             <tr>
-                <td className='question-listing__option'>
-                    {text.replace(/(\.\.\.\?)/g, '')}
-                    {" "}
+                <td className='question-listing__option text-right'>
                     <span className={styles[0]}>
                         {options[0]}
                     </span>
-                    {" or "}
-                    <span className={styles[1]}>
-                        {options[1]}
-                    </span>
-                    {"?"}
-                    {
-                        comment &&
-                        <p className='question-listing__comment'>{comment}</p>
-                    }
                 </td>
                 <td className='text-right'>{data[0].value}</td>
                 <td className='text-center'>
                     <Piechart data={data} />
                 </td>
                 <td>{data[1].value}</td>
+                <td className='question-listing__option'>
+                    <span className={styles[1]}>
+                        {options[1]}
+                    </span>
+                </td>
             </tr>
         );
     }

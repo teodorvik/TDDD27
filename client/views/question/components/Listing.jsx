@@ -14,7 +14,7 @@ const Listing = ({ questions }) => {
                 <tr>
                     <th className='text-right'>Option 1</th>
                     <th className='text-right'>Votes</th>
-                    <th className='text-center'>Stats %</th>
+                    <th className='text-center'>%</th>
                     <th>Votes</th>
                     <th>Option 2</th>
                 </tr>

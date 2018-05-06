@@ -80,7 +80,7 @@ class Row extends Component {
                 <td className='text-center'>
                     <Piechart data={data} />
                 </td>
-                <td>{data[0].value}</td>
+                <td>{data[1].value}</td>
             </tr>
         );
     }

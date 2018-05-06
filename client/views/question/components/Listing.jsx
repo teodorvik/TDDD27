@@ -13,8 +13,9 @@ const Listing = ({ questions }) => {
             <thead>
                 <tr>
                     <th>Question</th>
-                    <th>Stats %</th>
-                    <th></th>
+                    <th className='text-right'>Votes Option 1</th>
+                    <th className='text-center'>Stats %</th>
+                    <th>Votes Option 2</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,45 +34,22 @@ class Row extends Component {
         this.state = {
             data: [
                 {
-                    isHovered: false,
                     usersChoice: false,
                     value: Math.floor(Math.random() * 100)
                 },
                 {
-                    isHovered: false,
                     usersChoice: true,
                     value: Math.floor(Math.random() * 100)
                 }
             ]
         }
 
-        this.onMouseEnterHandler = this.onMouseEnterHandler.bind(this);
-        this.onMouseLeaveHandler = this.onMouseLeaveHandler.bind(this);
         this.calcStyle = this.calcStyle.bind(this);
-    }
-
-    onMouseEnterHandler(id) {
-        const { data } = this.state;
-        data[id].isHovered = true;
-        this.setState({ data });
-    }
-
-    onMouseLeaveHandler(id) {
-        const { data } = this.state;
-        data[id].isHovered = false;
-        this.setState({ data });
     }
 
     calcStyle() {
         const { data } = this.state;
-
-        const showUsersChoice = data.find(option => option.isHovered) === undefined;
-
-        if (showUsersChoice) {
-            return data.map(option => option.usersChoice ? 'users-choice' : '');
-        } else {
-            return data.map(option => option.isHovered ? 'hovered' : '');
-        }
+        return data.map(option => option.usersChoice ? 'users-choice' : '');
     }
 
     render() {
@@ -85,19 +63,11 @@ class Row extends Component {
                 <td className='question-listing__option'>
                     {text.replace(/(\.\.\.\?)/g, '')}
                     {" "}
-                    <span
-                        className={styles[0]}
-                        onMouseEnter={() => this.onMouseEnterHandler(0)}
-                        onMouseLeave={() => this.onMouseLeaveHandler(0)}
-                    >
+                    <span className={styles[0]}>
                         {options[0]}
                     </span>
                     {" or "}
-                    <span
-                        className={styles[1]}
-                        onMouseEnter={() => this.onMouseEnterHandler(1)}
-                        onMouseLeave={() => this.onMouseLeaveHandler(1)}
-                    >
+                    <span className={styles[1]}>
                         {options[1]}
                     </span>
                     {"?"}
@@ -106,17 +76,29 @@ class Row extends Component {
                         <p className='question-listing__comment'>{comment}</p>
                     }
                 </td>
-                <td>
-                    {data[0].value}
+                <td className='text-right'>{data[0].value}</td>
+                <td className='text-center'>
                     <Piechart data={data} />
-                    {data[1].value}
                 </td>
+                <td>{data[0].value}</td>
             </tr>
         );
     }
 }
 
 class Piechart extends Component {
+    // Rotates the pie chart
+    static calcRotation(data) {
+        const firstSlice = data[0].value;
+        const secondSlice = data[1].value;
+        const total = firstSlice + secondSlice;
+        // Centers first slice at the top
+        let rotation = (firstSlice/total) * 180;
+        rotation = firstSlice > secondSlice ? -rotation : rotation;
+        // Rotates 90 degrees extra to center along the horizontal axis
+        return rotation - 90;
+    }
+
     constructor(props) {
         super(props);
         this.w = props.width || 60;
@@ -124,32 +106,19 @@ class Piechart extends Component {
         this.r = props.radius || 30;
 
         let refPie = null;
-        this.getColors = this.getColors.bind(this);
-        this.updateData = this.updateData.bind(this);
-    }
-
-    getColors() {
-        const { data } = this.props;
-
-        const showUsersChoice = data.find(option => option.isHovered) === undefined;
-
-        // TODO: Doesn't really seem to work
-        if (showUsersChoice) {
-            return data.map(option => option.usersChoice ? 'blue' : 'lightgray');
-        } else {
-            return data.map(option => option.isHovered ? 'orange' : 'lightgray');
-        }
     }
 
     componentDidMount() {
         const { data } = this.props;
-        const colors = this.getColors();
+
+        const rotation = Piechart.calcRotation(data);
+
         const vis = d3.select(this.refPie).append("svg:svg")
             .data([data]) //associate our data with the document
             .attr("width", this.w)
             .attr("height", this.h)
             .append("svg:g") // make a group to hold our pie chart
-            .attr("transform", "translate(" + this.r + "," + this.r + ")") // move the center of the pie chart from 0, 0 to radius, radius
+            .attr("transform", "translate(" + this.r + "," + this.r + ") rotate(" + rotation + ")") // move the center of the pie chart from 0, 0 to radius, radius
 
         //this will create <path> elements for us using arc data
         var arc = d3.arc()
@@ -165,25 +134,13 @@ class Piechart extends Component {
             .attr("class", "slice"); //allow us to style things in the slices (like text)
 
         arcs.append("svg:path")
-            .attr("fill", function (d, i) { return colors[i]; })
+            .attr("class", (d, i) => {
+                return data[i].usersChoice ? 'selected' : '';
+            })
             .attr("d", arc); //this creates the actual SVG path using the associated data (pie) with the arc drawing function
     }
 
-    updateData() {
-        const { data } = this.props;
-        const colors = this.getColors();
-
-        if (this.refPie !== null) {
-            d3.select(this.refPie)
-                .selectAll("g.slice")
-                .data([data])
-                .selectAll("path")
-                .attr("fill", function (d, i) { return colors[i]; });
-        }
-    }
-
     render() {
-        this.updateData();
         return <span ref={node => { this.refPie = node }}></span>;
     }
 }

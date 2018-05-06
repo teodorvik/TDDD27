@@ -19,13 +19,21 @@
             &.users-choice {
                 background: #d6e9ff;
             }
-            &.hovered {
-                background: #d6e9ff;
-            }
         }
     }
 
     .text-right {
         text-align: right;
+    }
+    .text-center {
+        text-align: center;
+    }
+
+    // PIE CHART
+    .slice {
+        fill: #ececec;
+        .selected {
+            fill: darken(#d6e9ff, 30);
+        }
     }
 }

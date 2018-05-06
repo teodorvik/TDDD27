@@ -66,7 +66,7 @@ const config = {
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    new CleanWebpackPlugin(['build'])
+    //new CleanWebpackPlugin(['build'])
   ]
 };
 

@@ -39,7 +39,6 @@ export const currentQuestion = (state = {}, action) => {
         case GET_RANDOM_QUESTION_REQUEST:
             return state;
         case GET_RANDOM_QUESTION_SUCCESS:
-            console.log("SUCCESS!", action)
             return { ...action.payload };
         case GET_RANDOM_QUESTION_FAILED:
             console.warn(`${action.type}: ${action.payload}`);

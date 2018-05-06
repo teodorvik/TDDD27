@@ -14,7 +14,7 @@ export class AnswerQuestion extends Component {
 
     render() {
         const { question, selectOption } = this.props;
-        // console.log(question);
+
         if (question && question.options) {
             return (
                 <Question {...question} selectOption={selectOption} />
@@ -26,7 +26,6 @@ export class AnswerQuestion extends Component {
 
 const mapStateToProps = state => {
     const { currentQuestion } = state;
-    console.log(currentQuestion)
     return {
         question: currentQuestion
     };

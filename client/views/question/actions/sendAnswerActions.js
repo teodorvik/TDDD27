@@ -27,7 +27,7 @@ export const sendAnswerAction = (questionId, optionsIdx, shouldFetchNewQuestion)
         dispatch(sendAnswerRequest());
 
         sendAnswerCall(questionId, optionsIdx)
-            .then(reponse => {
+            .then(response => {
                 dispatch(sendAnswerSuccess(response));
                 if (shouldFetchNewQuestion) {
                     dispatch(getRandomQuestionAction());

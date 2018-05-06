@@ -1,4 +1,28 @@
 .question-listing {
     width: 100%;
     text-align: left;
+    border-collapse: collapse;
+
+    td {
+        box-sizing: border-box;
+        padding: 4px;
+        border-top: 1px solid lightgray;
+    }
+    &__option {
+        span {
+            box-sizing: border-box;
+            padding: 1px 5px;
+            border-radius: 2px;
+            &.red {
+                background: #ffd9d9;
+            }
+            &.blue {
+                background: #d6e9ff;
+            }
+        }
+    }
+
+    .text-right {
+        text-align: right;
+    }
 }

@@ -21,7 +21,6 @@ export const sendAnswerFailed = error => ({
     payload: error
 });
 
-// TODO: Send parameters with call
 export const sendAnswerAction = (questionId, optionsIdx, shouldFetchNewQuestion) => {
     return (dispatch) => {
         dispatch(sendAnswerRequest());

@@ -19,6 +19,39 @@ function getQuestion(req, res) {
     });
 };
 
+function getAnsweredQuestions(req, res) {
+    // TODO: Only return questions answered by the user
+    Answer.distinct("questionid").exec((err, answeredQuestionIds) => {
+        if (err) {
+            next(err);
+        }
+
+        Question.find({ _id: { $in: answeredQuestionIds } }).exec((err, answeredQuestions) => {
+            if (err) {
+                res.status(500).send(err);
+            }
+            res.json({ questions: answeredQuestions });
+        });
+    });
+};
+
+function getUnansweredQuestions(req, res) {
+    // TODO: Only return questions unanswered by the user
+    Answer.distinct("questionid").exec((err, answeredQuestionIds) => {
+        if (err) {
+            next(err);
+        }
+
+        Question.find({ _id: { $nin: answeredQuestionIds } }).exec((err, unansweredQuestions) => {
+            if (err) {
+                res.status(500).send(err);
+            }
+            res.json({ questions: unansweredQuestions });
+        });
+    });
+};
+
+
 function getRandomQuestion(req, res) {
     Question.count().exec((err, count) => {
         var random = Math.floor(Math.random() * count);
@@ -82,7 +115,7 @@ function getAnswer(req, res) {
 };
 
 function addAnswer(req, res) {
-    if ((!req.body.answer.questionid) || typeof req.body.answer.option === 'undefined' ) {
+    if ((!req.body.answer.questionid) || typeof req.body.answer.option === 'undefined') {
         res.status(403).end();
     }
     //TODO(Aron) connect answer to user. Check if user is allowed to add answers.
@@ -113,6 +146,8 @@ module.exports = {
     getQuestions,
     getQuestion,
     getRandomQuestion,
+    getAnsweredQuestions,
+    getUnansweredQuestions,
     addQuestion,
     deleteQuestion,
 

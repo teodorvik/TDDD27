@@ -9,11 +9,13 @@ router.use(function timeLog (req, res, next) {
   next();
 });
 
-router.get(    '/questions',        controller.getQuestions);
-router.get(    '/questions/random', controller.getRandomQuestion);
-router.get(    '/questions/:id',    controller.getQuestion);
-router.post(   '/questions/',       controller.addQuestion);
-router.delete( '/questions/:id',    controller.deleteQuestion);
+router.get(    '/questions',            controller.getQuestions);
+router.get(    '/questions/random',     controller.getRandomQuestion);
+router.get(    '/questions/answered',   controller.getAnsweredQuestions);
+router.get(    '/questions/unanswered', controller.getUnansweredQuestions);
+router.get(    '/questions/:id',        controller.getQuestion);
+router.post(   '/questions/',           controller.addQuestion);
+router.delete( '/questions/:id',        controller.deleteQuestion);
 
 router.get(    '/answers',          controller.getAnswers);
 router.get(    '/answers/:id',      controller.getAnswer);

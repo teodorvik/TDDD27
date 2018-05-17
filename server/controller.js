@@ -2,6 +2,7 @@ const Question = require('./models/question');
 const Answer = require('./models/answer');
 
 function getQuestions(req, res) {
+    console.log(req.headers.authorization);
     Question.find().exec((err, questions) => {
         if (err) {
             res.status(500).send(err);

@@ -14,18 +14,19 @@ class Auth {
         this.auth0.authorize();
     }
 
-    handleAuthentication() {
+    handleAuthentication(callback) {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
                 localStorage.setItem('access_token', authResult.accessToken);
                 localStorage.setItem('id_token', authResult.idToken);
                 localStorage.setItem('expires_at', expiresAt);
-                history.replaceState({}, document.title, '/'); //TODO: Check login source?
+                history.replaceState({}, document.title, '/'); //TODO(Aron) Check login source?
             } else if (err) {
                 console.log(err);
-                history.replaceState({}, document.title, '/'); //TODO: Check login source?
+                history.replaceState({}, document.title, '/'); //TODO(Aron) Check login source?
             }
+            callback();
         });
     }
 
@@ -41,7 +42,11 @@ class Auth {
     }
 
     accessToken() {
-        return localStorage.getItem('access_token');
+        if (this.isAuthenticated()) { //TODO(aron) How do we handle expiration checks and stuff?
+            return localStorage.getItem('access_token');
+        } else {
+            return '';
+        }
     }
 
 }

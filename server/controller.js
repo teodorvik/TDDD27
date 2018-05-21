@@ -2,10 +2,10 @@ const Question = require('./models/question');
 const Answer = require('./models/answer');
 
 function getQuestions(req, res) {
-    console.log(req.headers.authorization);
     Question.find().exec((err, questions) => {
         if (err) {
             res.status(500).send(err);
+            return;
         }
         res.json(questions);
     });
@@ -15,6 +15,7 @@ function getQuestion(req, res) {
     Question.findOne({ id: req.params.id }).exec((err, question) => {
         if (err) {
             res.status(500).send(err);
+            return;
         }
         res.json({ question });
     });
@@ -22,7 +23,7 @@ function getQuestion(req, res) {
 
 function getAnsweredQuestions(req, res) {
     // TODO: Only return questions answered by the user
-    Answer.distinct("questionid").exec((err, answeredQuestionIds) => {
+    Answer.find({ userid: res.locals.userId }).exec((err, answeredQuestionIds) => {
         if (err) {
             next(err);
         }
@@ -30,6 +31,7 @@ function getAnsweredQuestions(req, res) {
         Question.find({ _id: { $in: answeredQuestionIds } }).exec((err, answeredQuestions) => {
             if (err) {
                 res.status(500).send(err);
+                return;
             }
             res.json({ questions: answeredQuestions });
         });
@@ -37,8 +39,8 @@ function getAnsweredQuestions(req, res) {
 };
 
 function getUnansweredQuestions(req, res) {
-    // TODO: Only return questions unanswered by the user
-    Answer.distinct("questionid").exec((err, answeredQuestionIds) => {
+    //TODO(Aron) if not logged in?
+    Answer.find({ userid: res.locals.userId }).exec((err, answeredQuestionIds) => {
         if (err) {
             next(err);
         }
@@ -46,6 +48,7 @@ function getUnansweredQuestions(req, res) {
         Question.find({ _id: { $nin: answeredQuestionIds } }).exec((err, unansweredQuestions) => {
             if (err) {
                 res.status(500).send(err);
+                return;
             }
             res.json({ questions: unansweredQuestions });
         });
@@ -54,14 +57,20 @@ function getUnansweredQuestions(req, res) {
 
 
 function getRandomQuestion(req, res) {
-    Question.count().exec((err, count) => {
-        var random = Math.floor(Math.random() * count);
+    //TODO(Aron) if not logged in?
+    Answer.find({ userid: 0 }).exec((err, answeredQuestionIds) => {
+        if (err) {
+            next(err);
+        }
 
-        Question.find().limit(1).skip(random).exec((err, question) => {
+        Question.find({ _id: { $nin: answeredQuestionIds } }).exec((err, unansweredQuestions) => {
             if (err) {
                 res.status(500).send(err);
+                return;
             }
-            res.json({ question });
+            var random = Math.floor(Math.random() * unansweredQuestions.length);
+            var question = [unansweredQuestions[random]];
+            res.json({question});
         });
     });
 };
@@ -69,14 +78,24 @@ function getRandomQuestion(req, res) {
 function addQuestion(req, res) {
     if (!req.body.question.text || !req.body.question.options || req.body.question.options.length < 2) {
         res.status(403).end();
+        return;
     }
 
-    //TODO(Aron) connect question to user. Check if user is allowed to add questions.
+    if(!res.locals.userId) {
+        res.status(401).end();
+        return;
+    }
 
-    const newQuestion = new Question(req.body.question);
+    const newQuestion = new Question({
+        userid: res.locals.userId,
+        text: req.body.question.text,
+        options: req.body.question.options,
+    });
+
     newQuestion.save((err, saved) => {
         if (err) {
             res.status(500).send(err);
+            return;
         }
         res.json({ question: saved });
     });
@@ -89,7 +108,14 @@ function deleteQuestion(req, res) {
     Question.findOne({ id: req.params.id }).exec((err, question) => {
         if (err) {
             res.status(500).send(err);
+            return;
         }
+
+        if(question.userid != res.locals.userId) {
+            res.status(401).end();
+            return;
+        }
+
         question.remove(() => {
             res.status(200).end();
         });
@@ -118,9 +144,20 @@ function getAnswer(req, res) {
 function addAnswer(req, res) {
     if ((!req.body.answer.questionid) || typeof req.body.answer.option === 'undefined') {
         res.status(403).end();
+        return;
     }
-    //TODO(Aron) connect answer to user. Check if user is allowed to add answers.
-    const newAnswer = new Answer(req.body.answer);
+
+    if(!res.locals.userId) {
+        res.status(401).end();
+        return;
+    }
+
+    const newAnswer = new Answer({
+        userid: res.locals.userId,
+        questionid: req.body.answer.questionid,
+        option: req.body.answer.option
+
+    });
     newAnswer.save((err, saved) => {
         if (err) {
             res.status(500).send(err);
@@ -131,12 +168,16 @@ function addAnswer(req, res) {
 
 function deleteAnswer(req, res) {
 
-    //TODO(Aron) connect answer to user. Check if user is allowed to delete answers.
-
     Answer.findOne({ id: req.params.id }).exec((err, answer) => {
         if (err) {
             res.status(500).send(err);
         }
+
+        if(answer.userid != res.locals.userId) {
+            res.status(401).end();
+            return;
+        }
+
         answer.remove(() => {
             res.status(200).end();
         });

@@ -1,24 +1,36 @@
+import Auth from '../../login/actions/Auth';
+
 const API_path = 'http://localhost:3000/api';
 
 const post_headers = {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + Auth.accessToken(),
+    },
     method: 'POST',
 };
 
+const get_headers = {
+    headers: {
+        'Authorization': 'Bearer ' + Auth.accessToken(),
+    },
+    method: 'GET',
+};
+
 export const getQuestionsCall = () => (
-    fetch(`${API_path}/questions`)
+    fetch(`${API_path}/questions`, { ...get_headers })
         .then(response => response.json())
         .catch(error => console.log(error))
 );
 
 export const getRandomQuestionCall = () => (
-    fetch(`${API_path}/questions/random`)
+    fetch(`${API_path}/questions/random`, { ...get_headers })
         .then(response => response.json())
         .catch(error => console.log(error))
 );
 
 export const getQuestionCall = id => (
-    fetch(`${API_path}/questions/${id}`)
+    fetch(`${API_path}/questions/${id}`, { ...get_headers })
         .then(response => response.json())
         .catch(error => console.log(error))
 );

@@ -11,6 +11,7 @@ import QuestionListing from './views/question/containers/QuestionListing';
 import MainTabs from './views/navigation/containers/MainTabs';
 import MainPanels from './views/navigation/containers/MainPanels';
 import { Tab } from './views/navigation/components/Tabs';
+import Login from './views/login/containers/Login';
 
 import './style.scss';
 
@@ -27,6 +28,7 @@ export default class App extends Component {
               <div className='title'>
                 <h1>WYRV</h1>
                 <p>// "Would you rather" visualized</p>
+                <Login />
               </div>
               <MainTabs>
                 <Tab>Answer</Tab>

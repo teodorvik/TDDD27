@@ -9,20 +9,20 @@ module.exports = {
             options: ["be the author of a popular book", "a musician in a band who released a popular album"]
         },
         {
-            text: "Would you rather",
-            options: ["be a detective", "a pilot"]
+            text: "Would you rather be",
+            options: ["a detective", "a pilot"]
         },
         {
-            text: "Would you rather",
-            options: ["live in a house shaped like a circle", "a house shaped like a triangle"]
+            text: "Would you rather live in",
+            options: ["a house shaped like a circle", "a house shaped like a triangle"]
         },
         {
             text: "Would you rather",
             options: ["live in a place with a lot of trees", "live in a place near the ocean"]
         },
         {
-            text: "Would you rather",
-            options: ["do school work as a group", "by yourself"]
+            text: "Would you rather do school work",
+            options: ["as a group", "by yourself"]
         },
         {
             text: "Would you rather",
@@ -33,8 +33,8 @@ module.exports = {
             options: ["have a magic carpet that flies", "a see-through submarine"]
         },
         {
-            text: "Would you rather",
-            options: ["be able to do flips and backflips", "break dance"]
+            text: "Would you rather be able to",
+            options: ["do flips and backflips", "break dance"]
         },
         {
             text: "Would you rather",

@@ -19,8 +19,39 @@ function getQuestion(req, res) {
     });
 };
 
+// .group({
+//     _id: "$questionid",
+//     selectedOptionsArr: { $push: "$option" }
+// })
+
+// .group({
+//     _id: { questionId: "$questionid", option: "$option"}, sum: { $sum: 1 }
+// })
+
 function getAnsweredQuestions(req, res) {
     // TODO: Only return questions answered by the user
+
+    Answer.aggregate()
+        // Joins on questions and options.
+        // sum is number of votes for that option
+        .group({
+            _id: { questionid: "$questionid", option: "$option" }, sum: { $sum: 1 }
+        })
+        // Group on questionid and create object
+        // options: { option: alternative, votes: sum }
+        .group({
+            _id: "$_id.questionid",
+            options: {
+                $push: {
+                    option: "$_id.option",
+                    votes: "$sum"
+                }
+            }
+        })
+        .exec((err, test) => console.log(test));
+
+
+    // Add property showing what question the user answered
     Answer.distinct("questionid").exec((err, answeredQuestionIds) => {
         if (err) {
             next(err);

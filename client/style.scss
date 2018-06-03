@@ -18,7 +18,9 @@ header {
     display: flex;
     justify-content: space-between;
 
-    .title {
+    .title > a {
+        color: white;
+        text-decoration: none;
         display: flex;
         align-items: baseline;
         box-sizing: border-box;
@@ -38,4 +40,25 @@ header {
 .d3js-canvas {
     background: grey;
     text-align: center;
+}
+
+.tabs {
+    a {
+        display: inline-block;
+        line-height: 60px;
+        height: 100%;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0px 20px;
+        background: none;
+        border: none;
+        color: white;
+        opacity: 0.5;
+        cursor: pointer;
+        text-decoration: none;
+
+        &.is-active {
+            opacity: 1;
+        }
+    }
 }

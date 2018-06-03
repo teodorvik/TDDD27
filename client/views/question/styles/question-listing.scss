@@ -1,37 +1,51 @@
 .question-listing {
     width: 100%;
     text-align: left;
-    border-collapse: collapse;
 
-    th, td {
-        box-sizing: border-box;
-        padding: 10px 4px;
-    }
-
-    td {
+    .row {
+        display: grid;
+        grid-template-columns: 1fr 50px 70px 50px 1fr;
         border-top: 1px solid lightgray;
+        align-items: center;
+
+        & > div {
+            box-sizing: border-box;
+            padding: 10px 4px;
+        }
     }
 
-    &__option {
+    .header {
+        text-align: center;
+        font-weight: bold;
+
+        &.option-2-text {
+            text-align: left;
+        }
+    }
+
+    .option-1-votes,
+    .option-1-text {
+        text-align: right;
+    }
+
+    .option-1-text {
         span {
             box-sizing: border-box;
             padding: 1px 5px;
             border-radius: 2px;
             background: #ececec;
             cursor: pointer;
-
-            &.users-choice {
-                background: #d6e9ff;
-            }
         }
     }
 
-    .text-right {
-        text-align: right;
-    }
-
-    .text-center {
-        text-align: center;
+    .option-2-text {
+        span {
+            box-sizing: border-box;
+            padding: 1px 5px;
+            border-radius: 2px;
+            background: #d6e9ff;
+            cursor: pointer;
+        }
     }
 
     // PIE CHART

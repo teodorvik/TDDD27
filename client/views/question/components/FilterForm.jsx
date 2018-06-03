@@ -4,7 +4,7 @@ const FilterForm = ({ filterText, setFilterText }) => (
     <div className='question-filter'>
         <span>Search </span>
         <input
-            value={filterText} 
+            value={filterText}
             onChange={(event) => setFilterText(event.target.value)}
             placeholder='for a word/phrase'
         />

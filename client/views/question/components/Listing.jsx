@@ -9,22 +9,18 @@ const Listing = ({ questions }) => {
         return <p>No questions</p>
     }
     return (
-        <table className='question-listing'>
-            <thead>
-                <tr>
-                    <th className='text-right'>Option 1</th>
-                    <th className='text-right'>Votes</th>
-                    <th className='text-center'>%</th>
-                    <th>Votes</th>
-                    <th>Option 2</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    questions.map(question => <Row key={question._id} {...question} />)
-                }
-            </tbody>
-        </table>
+        <div className='question-listing'>
+            <div className='row'>
+                <div className='option-1-text header'>Option 1</div>
+                <div className='option-1-vote header'>Votes</div>
+                <div className='percentage header'>%</div>
+                <div className='option-2-votes header'>Votes</div>
+                <div className='option-2-text header'>Option 2</div>
+            </div>
+            {
+                questions.map(question => <Row key={question._id} {...question} />)
+            }
+        </div>
     );
 }
 
@@ -44,39 +40,30 @@ class Row extends Component {
                 }
             ]
         }
-
-        this.calcStyle = this.calcStyle.bind(this);
-    }
-
-    calcStyle() {
-        const { data } = this.state;
-        return data.map(option => option.usersChoice ? 'users-choice' : '');
     }
 
     render() {
         const { options } = this.props;
         const { data } = this.state;
 
-        const styles = this.calcStyle();
-
         return (
-            <tr>
-                <td className='question-listing__option text-right'>
-                    <span className={styles[0]}>
+            <div className='row'>
+                <div className='option-1-text'>
+                    <span>
                         {options[0]}
                     </span>
-                </td>
-                <td className='text-right'>{data[0].value}</td>
-                <td className='text-center'>
+                </div>
+                <div className='option-1-votes'>{data[0].value}</div>
+                <div className='percentage'>
                     <Piechart data={data} />
-                </td>
-                <td>{data[1].value}</td>
-                <td className='question-listing__option'>
-                    <span className={styles[1]}>
+                </div>
+                <div className='option-2-votes'>{data[1].value}</div>
+                <div className='option-2-text'>
+                    <span>
                         {options[1]}
                     </span>
-                </td>
-            </tr>
+                </div>
+            </div>
         );
     }
 }
@@ -88,7 +75,7 @@ class Piechart extends Component {
         const secondSlice = data[1].value;
         const total = firstSlice + secondSlice;
         // Centers first slice at the top
-        let rotation = (firstSlice/total) * 180;
+        let rotation = (firstSlice / total) * 180;
         rotation = firstSlice > secondSlice ? -rotation : rotation;
         // Rotates 90 degrees extra to center along the horizontal axis
         return rotation - 90;

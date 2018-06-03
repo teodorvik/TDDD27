@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Listing from '../components/Listing';
-import { getQuestionsAction } from '../actions/getQuestionsActions';
+import { getQuestionsAction, setFilterText } from '../actions/getQuestionsActions';
+import FilterForm from '../components/FilterForm';
 
 import '../styles/question-listing.scss';
 
@@ -16,25 +17,39 @@ class QuestionListing extends Component {
     }
 
     render() {
-        const { questions } = this.props;
+        const { questions, filterText, setFilterText } = this.props;
+
+        const filterProps = {
+            filterText,
+            setFilterText
+        };
+
+        const filteredQuestions = questions.filter(({options}) => options.join(' ').includes(filterText));
 
         return (
-            <Listing questions={questions} />
+            <React.Fragment>
+                <FilterForm {...filterProps} />
+                <Listing questions={filteredQuestions} />
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = state => {
-    const { questions } = state;
+    const { questions, filterText } = state;
 
     return {
-        questions
+        questions,
+        filterText
     };
 };
 
 const mapDispatchToProps = dispatch => ({
     getQuestions: () => {
         dispatch(getQuestionsAction());
+    },
+    setFilterText: (text) => {
+        dispatch(setFilterText(text));
     }
 });
 

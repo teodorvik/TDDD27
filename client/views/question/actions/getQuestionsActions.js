@@ -2,9 +2,15 @@ import {
     GET_QUESTIONS_REQUEST,
     GET_QUESTIONS_SUCCESS,
     GET_QUESTIONS_FAILED,
+    SET_FILTER_TEXT
 } from './actionConstants';
 
 import { getQuestionsCall } from '../services/api';
+
+export const setFilterText = (filterText) => ({
+    type: SET_FILTER_TEXT,
+    payload: filterText
+});
 
 export const getQuestionsRequest = () => ({
     type: GET_QUESTIONS_REQUEST

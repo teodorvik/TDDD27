@@ -18,7 +18,7 @@ const get_headers = {
 };
 
 export const getQuestionsCall = () => (
-    fetch(`${API_path}/questions`, { ...get_headers })
+    fetch(`${API_path}/questions/answered`, { ...get_headers })
         .then(response => response.json())
         .catch(error => console.log(error))
 );
@@ -29,6 +29,7 @@ export const getRandomQuestionCall = () => (
         .catch(error => console.log(error))
 );
 
+//TODO(Aron) Currently not used. Remove?
 export const getQuestionCall = id => (
     fetch(`${API_path}/questions/${id}`, { ...get_headers })
         .then(response => response.json())
@@ -45,11 +46,10 @@ export const addQuestionCall = question => (
 );
 
 export const sendAnswerCall = (questionId, optionsIdx) => (
-    fetch(`${API_path}/answers/`, {
+    fetch(`${API_path}/questions/${questionId}/answers/`, {
         ...post_headers,
         body: JSON.stringify({
             answer: {
-                questionid: questionId,
                 option: optionsIdx
             }
         })

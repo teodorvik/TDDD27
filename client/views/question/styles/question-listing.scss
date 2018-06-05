@@ -1,6 +1,13 @@
 .question-listing {
     width: 100%;
     text-align: left;
+    
+    &__info {
+        text-align: center;
+        padding: 2px;
+        background: #d6e9ff;
+
+    }
 
     .row {
         display: grid;

@@ -50,13 +50,13 @@ export const isAuthenticatedAction = () => {
 }
 
 export const authenticationAction = () => {
-    if (!localStorage.getItem('session_id')) {
-        let uuid = uuidv4();
-        console.log(uuid);
-        localStorage.setItem('session_id', uuid);
-    }
-
     return (dispatch) => {
+        if (!localStorage.getItem('session_id')) {
+            let uuid = uuidv4();
+            console.log(uuid);
+            localStorage.setItem('session_id', uuid);
+        }
+
         auth.parseHash((error, authResult) => {
             if (authResult && authResult.accessToken) {
                 history.replaceState({}, document.title, '/');
@@ -77,10 +77,11 @@ export const authenticationAction = () => {
 }
 
 export const logoutAction = (user) => {
-    console.log("LOGOUT");
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expires_at');
     return (dispatch) => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('expires_at');
+        location.reload();
+
         dispatch(logout());
     }
 }

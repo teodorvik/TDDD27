@@ -1,60 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import AddForm from '../components/AddForm';
-import { addQuestionAction } from '../actions/addQuestionActions';
+import { addQuestionAction, setOptionsValues, setText } from '../actions/addQuestionActions';
 
-class CreateQuestion extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            text: 'Would you rather...?',
-            options: ["", ""]
-        }
-
-        this.updateOptionValue = this.updateOptionValue.bind(this);
-        this.updateQuestionValue = this.updateQuestionValue.bind(this);
-        this.submitQuestion = this.submitQuestion.bind(this);
+const CreateQuestion = ({ options, msg, text, submitQuestion, setOptionsValues, setText }) => {
+    const formProps = {
+        text,
+        options,
+        msg,
+        setText,
+        setOptionsValues,
+        submitQuestion
     }
 
-
-    updateOptionValue(id, newValue) {
-        let { options } = this.state;
-        options[id] = newValue;
-
-        this.setState({ options });
-    }
-
-    updateQuestionValue(event, newValue) {
-        this.setState({ text: newValue });
-    }
-
-    submitQuestion() {
-        const { addQuestion } = this.props;
-        addQuestion({ question: this.state });
-    }
-
-    render() {
-        const { text, options } = this.state;
-
-        const formProps = {
-            text,
-            options,
-            updateQuestionValue: this.updateQuestionValue,
-            updateOptionValue: this.updateOptionValue,
-            submitQuestion: this.submitQuestion
-        }
-
-        return (
+    return (
+        <React.Fragment>
             <AddForm {...formProps} />
-        );
-    }
+        </React.Fragment>
+    );
 }
 
+const mapStateToProps = (state) => {
+    const { addQuestion } = state;
+
+    return {
+        options: addQuestion.options,
+        msg: addQuestion.msg,
+        text: addQuestion.text
+    }
+};
+
 const mapDispatchToProps = dispatch => ({
-    addQuestion: (question) => {
+    setText: (event, text) => {
+        dispatch(setText(text));
+    },
+    setOptionsValuesBluePrint: (values) => {
+        dispatch(setOptionsValues(values));
+    },
+    submitQuestionBluePrint: (options, text) => {
+        const question = {
+            question: {
+                text,
+                options
+            }
+        };
+
         dispatch(addQuestionAction(question));
     }
 })
 
-export default connect(null, mapDispatchToProps)(CreateQuestion);
+const mergeProps = (stateProps, dispatchProps) => ({
+    ...stateProps,
+    ...dispatchProps,
+    submitQuestion: () => {
+        const { options, text } = stateProps;
+        dispatchProps.submitQuestionBluePrint(options, text);
+    },
+    setOptionsValues: (id, newValue) => {
+        let newOptions = [...stateProps.options];
+        newOptions[id] = newValue;
+        dispatchProps.setOptionsValuesBluePrint(newOptions);
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(CreateQuestion);

@@ -29,8 +29,8 @@ module.exports = {
             options: ["accidentally be responsible for the death of a child", "accidentally be responsible for the deaths of three adults"]
         },
         {
-            text: "Would you rather",
-            options: ["your shirts be always two sizes too big", "one size too small"]
+            text: "Would you rather your shirts be always",
+            options: ["two sizes too big", "one size too small"]
         },
         {
             text: "Would you rather",
@@ -41,8 +41,8 @@ module.exports = {
             options: ["the general public think you are a horrible person but your family be very proud of you", "your family think you are a horrible person but the general public be very proud of you"]
         },
         {
-            text: "Would you rather",
-            options: ["live your entire life in a virtual reality where all your wishes are granted", "in the real world"]
+            text: "Would you rather live your entire life",
+            options: ["in a virtual reality where all your wishes are granted", "in the real world"]
         },
         {
             text: "Would you rather",
@@ -69,8 +69,8 @@ module.exports = {
             options: ["be completely invisible for one day", "be able to fly for one day"]
         },
         {
-            text: "Would you rather",
-            options: ["be locked in a room that is constantly dark for a week", "a room that is constantly bright for a week"]
+            text: "Would you rather be locked in",
+            options: ["a room that is constantly dark for a week", "a room that is constantly bright for a week"]
         },
         {
             text: "Would you rather",
@@ -106,8 +106,8 @@ module.exports = {
             comment: "You can’t change the time or method of your death."
         },
         {
-            text: "Would you rather",
-            options: ["be transported permanently 500 years into the future", "500 years into the past"]
+            text: "Would you rather be transported permanently",
+            options: ["500 years into the future", "500 years into the past"]
         },
         {
             text: "Would you rather",
@@ -126,13 +126,13 @@ module.exports = {
             options: ["have hands that kept growing as you got older", "feet that kept growing as you got older"]
         },
         {
-            text: "Would you rather",
-            options: ["have unlimited sushi for life", "unlimited tacos for life"],
+            text: "Would you rather have",
+            options: ["unlimited sushi for life", "unlimited tacos for life"],
             comment: "Both are amazingly delicious and can be any type of sushi / taco you want."
         },
         {
-            text: "Would you rather",
-            options: ["be unable to use search engines", "unable to use social media"]
+            text: "Would you rather be",
+            options: ["unable to use search engines", "unable to use social media"]
         },
         {
             text: "Would you rather",
@@ -177,7 +177,8 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["never have to work again", "never have to sleep again (you won’t feel tired", "suffer negative health effects)"]
+            options: ["never have to work again", "never have to sleep again"],
+            comment: 'You won’t feel tired or suffer negative health effects'
         },
         {
             text: "Would you rather",
@@ -209,7 +210,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["live in virtual reality where you are all powerful", "live in the real world and be able to go anywhere but not be able to interact with anyone", "anything"]
+            options: ["live in virtual reality where you are all powerful", "live in the real world and be able to go anywhere but not be able to interact with anyone or anything"]
         },
         {
             text: "Would you rather",
@@ -261,7 +262,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["not be able to open any closed doors (locked", "unlocked)", "not be able to close any open doors"]
+            options: ["not be able to open any closed doors (locked or unlocked)", "not be able to close any open doors"]
         },
         {
             text: "Would you rather",
@@ -286,7 +287,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["have a clown only you can see that follows you everywhere and just stands silently in a corner watching you without doing", "saying anything", "have a real life stalker who dresses like the Easter bunny that everyone can see"]
+            options: ["have a clown only you can see that follows you everywhere and just stands silently in a corner watching you without doing or saying anything", "have a real life stalker who dresses like the Easter bunny that everyone can see"]
         },
         {
             text: "Would you rather",
@@ -433,12 +434,12 @@ module.exports = {
             options: ["be born again in a totally different life", "born again with all the knowledge you have now"]
         },
         {
-            text: "Would you rather",
-            options: ["be forced to kill a kitten", "kill a puppy"]
+            text: "Would you rather be forced to",
+            options: ["kill a kitten", "kill a puppy"]
         },
         {
-            text: "Would you rather",
-            options: ["be lost in a bad part of town", "lost in the forest"]
+            text: "Would you rather be",
+            options: ["lost in a bad part of town", "lost in the forest"]
         },
         {
             text: "Would you rather",
@@ -449,8 +450,8 @@ module.exports = {
             options: ["randomly time travel +/- 20 years every time you fart", "teleport to a different place on earth (on land, not water) every time you sneeze"]
         },
         {
-            text: "Would you rather",
-            options: ["the aliens that make first contact be robotic", "organic"]
+            text: "Would you rather the aliens that make first contact be",
+            options: ["robotic", "organic"]
         },
         {
             text: "Would you rather",
@@ -469,8 +470,8 @@ module.exports = {
             options: ["be an amazing artist but not be able to see any of the art you created", "be an amazing musician but not be able to hear any of the music you create"]
         },
         {
-            text: "Would you rather",
-            options: ["there be a perpetual water balloon war going on in your city / town", "a perpetual food fight"]
+            text: "Would you rather there be",
+            options: ["a perpetual water balloon war going on in your city / town", "a perpetual food fight"]
         },
         {
             text: "Would you rather",
@@ -479,10 +480,6 @@ module.exports = {
         {
             text: "Would you rather",
             options: ["never have another embarrassing fall in public", "never feel the need to pass gas in public again"]
-        },
-        {
-            text: "Would you rather",
-            options: ["be able to talk to land animals, animals that fly,", "animals that live under the water"]
         },
         {
             text: "Would you rather",
@@ -510,7 +507,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["have every cat", "dog that gets lost end up at your house", "everyone’s clothes that they forget in the dryer get teleported to your house"]
+            options: ["have every cat or dog that gets lost end up at your house", "everyone’s clothes that they forget in the dryer get teleported to your house"]
         },
         {
             text: "Would you rather",
@@ -522,7 +519,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["know how above", "below average you are at everything", "know how above", "below average people are at one skill / talent just by looking at them"]
+            options: ["know how above or below average you are at everything", "know how above or below average people are at one skill / talent just by looking at them"]
         },
         {
             text: "Would you rather",
@@ -623,7 +620,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["earbuds and headphones never sit right on / in your ears", "have all music either slightly too quiet", "slightly too loud"]
+            options: ["earbuds and headphones never sit right on / in your ears", "have all music either slightly too quiet or slightly too loud"]
         },
         {
             text: "Would you rather",
@@ -682,8 +679,8 @@ module.exports = {
             options: ["be covered in fur", "covered in scales"]
         },
         {
-            text: "Would you rather",
-            options: ["your only mode of transportation be a donkey", "a giraffe"]
+            text: "Would you rather your only mode of transportation be",
+            options: ["a donkey", "a giraffe"]
         },
         {
             text: "Would you rather",
@@ -711,7 +708,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["move to a new city", "town every week", "never be able to leave the city", "town you were born in"]
+            options: ["move to a new city or town every week", "never be able to leave the city or town you were born in"]
         },
         {
             text: "Would you rather",
@@ -730,20 +727,20 @@ module.exports = {
             options: ["live in a haunted house where the ghosts ignore you and do their own thing", "be a ghost in a house living out a pleasant and uneventful week from your life again and again"]
         },
         {
-            text: "Would you rather",
-            options: ["be an average person in the present", "a king 2500 years ago"]
+            text: "Would you rather be",
+            options: ["an average person in the present", "a king 2500 years ago"]
         },
         {
-            text: "Would you rather",
-            options: ["be fantastic at riding horses", "amazing at driving dirt bikes"]
+            text: "Would you rather be",
+            options: ["fantastic at riding horses", "amazing at driving dirt bikes"]
         },
         {
             text: "Would you rather",
             options: ["write a novel that will be widely considered the most important book in the past 200 years but you and the book will only be appreciated after your death", "be the most famous erotica writer of your generation"]
         },
         {
-            text: "Would you rather",
-            options: ["spend the rest of your life with a sailboat as your home", "an RV as your home"]
+            text: "Would you rather spend the rest of your life with",
+            options: ["a sailboat as your home", "an RV as your home"]
         },
         {
             text: "Would you rather",
@@ -755,7 +752,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["vomit uncontrollably for one-minute every time you hear the happy birthday song", "get a headache that lasts for the rest of the day every time you see a bird (including in pictures", "a video)"]
+            options: ["vomit uncontrollably for one-minute every time you hear the happy birthday song", "get a headache that lasts for the rest of the day every time you see a bird (including in pictures or a video)"]
         },
         {
             text: "Would you rather",
@@ -763,7 +760,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["walk around work", "school for the whole day without realizing there is a giant brown stain on the back of your pants", "realize the deadline for that important paper / project was yesterday and you are nowhere near done"]
+            options: ["walk around work or school for the whole day without realizing there is a giant brown stain on the back of your pants", "realize the deadline for that important paper / project was yesterday and you are nowhere near done"]
         },
         {
             text: "Would you rather",
@@ -771,7 +768,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["have someone impersonating you and doing really amazing things that you get the credit for", "find money hidden in weird places all around your house every day but with no explanation where the money comes from", "how it keeps getting there"]
+            options: ["have someone impersonating you and doing really amazing things that you get the credit for", "find money hidden in weird places all around your house every day but with no explanation where the money comes from or how it keeps getting there"]
         },
         {
             text: "Would you rather",
@@ -846,7 +843,8 @@ module.exports = {
             options: ["clean rest stop toilets", "a slaughterhouse for a living"]
         },
         {
-            text: "Would you rather live the next 10 years of your life in", options: ["China", "Russia"]
+            text: "Would you rather live the next 10 years of your life in",
+            options: ["China", "Russia"]
         },
         {
             text: "Would you rather", 

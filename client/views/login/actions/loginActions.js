@@ -19,9 +19,12 @@ const auth = new auth0.WebAuth({
     scope: 'openid email profile'
 });
 
-const loginSuccess = () => ({
-    type: LOGIN_SUCCESS
-});
+const loginSuccess = () => {
+    console.log('loginSuccess')
+    return {
+        type: LOGIN_SUCCESS
+    }
+};
 
 const loginFailed = error => ({
     type: LOGIN_FAILED,

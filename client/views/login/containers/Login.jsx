@@ -10,9 +10,9 @@ class Login extends Component {
     render() {
         const { user, login, logout } = this.props;
         if (!user.isLoggedIn) {
-            return (<button onClick={login}>Login</button>);
+            return (<a onClick={login}>Login</a>);
         } else {
-            return (<button onClick={logout}>Logout</button>);
+            return (<a onClick={logout}>Logout</a>);
         }
     }
 }

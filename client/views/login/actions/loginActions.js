@@ -56,7 +56,6 @@ export const authenticationAction = () => {
     return (dispatch) => {
         if (!localStorage.getItem('session_id')) {
             let uuid = uuidv4();
-            console.log(uuid);
             localStorage.setItem('session_id', uuid);
         }
 

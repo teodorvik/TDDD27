@@ -6,7 +6,6 @@ import {
 } from '../actions/actionConstants';
 
 export const user = (state = { isLoggedIn: false, isLoaded: false }, action) => {
-    console.log("loginReducer");
     console.log(action);
     switch (action.type) {
         case LOGIN_SUCCESS:
@@ -21,6 +20,7 @@ export const user = (state = { isLoggedIn: false, isLoaded: false }, action) => 
                 isLoaded: true
             };
         case IS_AUTHENTICATED:
+            console.log("hej");
             return {
                 isLoggedIn: action.payload,
                 isLoaded: true

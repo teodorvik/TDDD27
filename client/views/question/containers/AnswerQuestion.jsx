@@ -13,21 +13,25 @@ export class AnswerQuestion extends Component {
     }
 
     render() {
-        const { question, selectOption } = this.props;
+        const { question, selectOption, user } = this.props;
 
-        if (question && question.options) {
+        if (question && question.options && user.isLoaded && question.isLoaded) {
             return (
                 <Question {...question} selectOption={selectOption} />
             );
+        } else if (!question.isLoaded) {
+            return (<div>Loading...</div>);
+        } else {
+            return null;
         }
-        return null;
     }
 }
 
 const mapStateToProps = state => {
-    const { currentQuestion } = state;
+    const { currentQuestion, user } = state;
     return {
-        question: currentQuestion
+        question: currentQuestion,
+        user
     };
 };
 

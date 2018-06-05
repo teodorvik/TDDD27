@@ -34,7 +34,6 @@ class Row extends Component {
 
     render() {
         const { options, answers, usersChoice } = this.props;
-        console.log(this.props);
         const data = [{
             value: answers.filter((x) => x.option == 0).length,
             usersChoice: (usersChoice == 0)

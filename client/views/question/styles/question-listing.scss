@@ -28,23 +28,18 @@
         text-align: right;
     }
 
-    .option-1-text {
+    .option-1-text,
+    .option-2-text {
         span {
             box-sizing: border-box;
             padding: 1px 5px;
             border-radius: 2px;
             background: #ececec;
             cursor: pointer;
-        }
-    }
 
-    .option-2-text {
-        span {
-            box-sizing: border-box;
-            padding: 1px 5px;
-            border-radius: 2px;
-            background: #d6e9ff;
-            cursor: pointer;
+            &.users-choice {
+                background: #d6e9ff;
+            }
         }
     }
 

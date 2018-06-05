@@ -37,11 +37,11 @@ class Login extends Component {
 
     render() {
         if (!this.state.isLoaded) {
-            return (<button>Loading</button>);
+            return (<a>Loading</a>);
         } else if (!this.state.isLoggedIn) {
-            return (<button onClick={this.login}>Login</button>);
+            return (<a onClick={this.login}>Login</a>);
         } else {
-            return (<button onClick={this.logout}>Logout</button>);
+            return (<a onClick={this.logout}>Logout</a>);
         }
     }
 }

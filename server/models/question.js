@@ -3,6 +3,7 @@ var questionSchema = mongoose.Schema({
 	userid: String,
     text: String,
     options: [String],
+    comment: String,
     answers: [{
     	_id: false,
     	userid: String,

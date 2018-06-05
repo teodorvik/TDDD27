@@ -9,18 +9,21 @@ const Listing = ({ questions }) => {
         return <p>No questions</p>
     }
     return (
-        <div className='question-listing'>
-            <div className='row'>
-                <div className='option-1-text header'>Option 1</div>
-                <div className='option-1-vote header'>Votes</div>
-                <div className='percentage header'>%</div>
-                <div className='option-2-votes header'>Votes</div>
-                <div className='option-2-text header'>Option 2</div>
+        <React.Fragment>
+            <div className='question-listing__info'>Your answer is displayed in blue</div>
+            <div className='question-listing'>
+                <div className='row'>
+                    <div className='option-1-text header'>Option 1</div>
+                    <div className='option-1-vote header'>Votes</div>
+                    <div className='percentage header'>%</div>
+                    <div className='option-2-votes header'>Votes</div>
+                    <div className='option-2-text header'>Option 2</div>
+                </div>
+                {
+                    questions.map(question => <Row key={question._id} {...question} />)
+                }
             </div>
-            {
-                questions.map(question => <Row key={question._id} {...question} />)
-            }
-        </div>
+        </React.Fragment>
     );
 }
 

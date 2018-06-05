@@ -9,8 +9,6 @@ class Login extends Component {
 
     render() {
         const { user, login, logout } = this.props;
-        console.log("LOGGED IN: " + user.isLoggedIn);
-        console.log(localStorage.getItem('expires_at'));
         if (!user.isLoggedIn) {
             return (<button onClick={login}>Login</button>);
         } else {

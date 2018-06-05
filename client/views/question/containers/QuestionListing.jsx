@@ -17,7 +17,8 @@ class QuestionListing extends Component {
     }
 
     render() {
-        const { questions, filterText, setFilterText } = this.props;
+        const { questions, filterText, setFilterText, user } = this.props;
+        console.log(this.props);
 
         const filterProps = {
             filterText,
@@ -26,21 +27,26 @@ class QuestionListing extends Component {
 
         const filteredQuestions = questions.filter(({options}) => options.join(' ').includes(filterText));
 
-        return (
-            <React.Fragment>
-                <FilterForm {...filterProps} />
-                <Listing questions={filteredQuestions} />
-            </React.Fragment>
-        )
+        if (user.isLoaded) {
+            return (
+                <React.Fragment>
+                    <FilterForm {...filterProps} />
+                    <Listing questions={filteredQuestions} />
+                </React.Fragment>
+            )
+        } else {
+            return null;
+        }
     }
 }
 
 const mapStateToProps = state => {
-    const { questions, filterText } = state;
+    const { questions, filterText, user } = state;
 
     return {
         questions,
-        filterText
+        filterText,
+        user
     };
 };
 

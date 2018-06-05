@@ -29,8 +29,8 @@ module.exports = {
             options: ["accidentally be responsible for the death of a child", "accidentally be responsible for the deaths of three adults"]
         },
         {
-            text: "Would you rather",
-            options: ["your shirts be always two sizes too big", "one size too small"]
+            text: "Would you rather your shirts be always",
+            options: ["two sizes too big", "one size too small"]
         },
         {
             text: "Would you rather",
@@ -41,8 +41,8 @@ module.exports = {
             options: ["the general public think you are a horrible person but your family be very proud of you", "your family think you are a horrible person but the general public be very proud of you"]
         },
         {
-            text: "Would you rather",
-            options: ["live your entire life in a virtual reality where all your wishes are granted", "in the real world"]
+            text: "Would you rather live your entire life",
+            options: ["in a virtual reality where all your wishes are granted", "in the real world"]
         },
         {
             text: "Would you rather",
@@ -69,8 +69,8 @@ module.exports = {
             options: ["be completely invisible for one day", "be able to fly for one day"]
         },
         {
-            text: "Would you rather",
-            options: ["be locked in a room that is constantly dark for a week", "a room that is constantly bright for a week"]
+            text: "Would you rather be locked in",
+            options: ["a room that is constantly dark for a week", "a room that is constantly bright for a week"]
         },
         {
             text: "Would you rather",
@@ -106,8 +106,8 @@ module.exports = {
             comment: "You can’t change the time or method of your death."
         },
         {
-            text: "Would you rather",
-            options: ["be transported permanently 500 years into the future", "500 years into the past"]
+            text: "Would you rather be transported permanently",
+            options: ["500 years into the future", "500 years into the past"]
         },
         {
             text: "Would you rather",
@@ -126,13 +126,13 @@ module.exports = {
             options: ["have hands that kept growing as you got older", "feet that kept growing as you got older"]
         },
         {
-            text: "Would you rather",
-            options: ["have unlimited sushi for life", "unlimited tacos for life"],
+            text: "Would you rather have",
+            options: ["unlimited sushi for life", "unlimited tacos for life"],
             comment: "Both are amazingly delicious and can be any type of sushi / taco you want."
         },
         {
-            text: "Would you rather",
-            options: ["be unable to use search engines", "unable to use social media"]
+            text: "Would you rather be",
+            options: ["unable to use search engines", "unable to use social media"]
         },
         {
             text: "Would you rather",
@@ -177,7 +177,8 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["never have to work again", "never have to sleep again (you won’t feel tired", "suffer negative health effects)"]
+            options: ["never have to work again", "never have to sleep again"],
+            comment: 'You won’t feel tired or suffer negative health effects'
         },
         {
             text: "Would you rather",
@@ -209,7 +210,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["live in virtual reality where you are all powerful", "live in the real world and be able to go anywhere but not be able to interact with anyone", "anything"]
+            options: ["live in virtual reality where you are all powerful", "live in the real world and be able to go anywhere but not be able to interact with anyone or anything"]
         },
         {
             text: "Would you rather",
@@ -261,7 +262,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["not be able to open any closed doors (locked", "unlocked)", "not be able to close any open doors"]
+            options: ["not be able to open any closed doors (locked or unlocked)", "not be able to close any open doors"]
         },
         {
             text: "Would you rather",
@@ -286,7 +287,7 @@ module.exports = {
         },
         {
             text: "Would you rather",
-            options: ["have a clown only you can see that follows you everywhere and just stands silently in a corner watching you without doing", "saying anything", "have a real life stalker who dresses like the Easter bunny that everyone can see"]
+            options: ["have a clown only you can see that follows you everywhere and just stands silently in a corner watching you without doing or saying anything", "have a real life stalker who dresses like the Easter bunny that everyone can see"]
         },
         {
             text: "Would you rather",

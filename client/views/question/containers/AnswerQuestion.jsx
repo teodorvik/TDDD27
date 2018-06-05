@@ -15,12 +15,15 @@ export class AnswerQuestion extends Component {
     render() {
         const { question, selectOption, user } = this.props;
 
-        if (question && question.options && user.isLoaded) {
+        if (question && question.options && user.isLoaded && question.isLoaded) {
             return (
                 <Question {...question} selectOption={selectOption} />
             );
+        } else if (!question.isLoaded) {
+            return (<div>Loading...</div>);
+        } else {
+            return null;
         }
-        return null;
     }
 }
 

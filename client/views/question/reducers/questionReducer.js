@@ -72,15 +72,21 @@ export const filterText = (state = '', action) => {
     }
 };
 
-export const currentQuestion = (state = {}, action) => {
+export const currentQuestion = (state = {isLoaded: true}, action) => {
     switch (action.type) {
         case GET_RANDOM_QUESTION_REQUEST:
-            return state;
+            return {
+                ...state,
+                isLoaded: false
+            };
         case GET_RANDOM_QUESTION_SUCCESS:
-            return { ...action.payload };
+            return { ...action.payload, isLoaded: true };
         case GET_RANDOM_QUESTION_FAILED:
             console.warn(`${action.type}: ${action.payload}`);
-            return state;
+            return {
+                ...state,
+                isLoaded: true
+            };
         default:
             return state;
     }

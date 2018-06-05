@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AddForm from '../components/AddForm';
 import { addQuestionAction, setOptionsValues, setText } from '../actions/addQuestionActions';
 
-const CreateQuestion = ({ options, msg, text, submitQuestion, setOptionsValues, setText }) => {
+const CreateQuestion = ({ options, msg, text, submitQuestion, setOptionsValues, setText, user }) => {
     const formProps = {
         text,
         options,
@@ -12,21 +12,25 @@ const CreateQuestion = ({ options, msg, text, submitQuestion, setOptionsValues, 
         setOptionsValues,
         submitQuestion
     }
-
-    return (
-        <React.Fragment>
-            <AddForm {...formProps} />
-        </React.Fragment>
-    );
+    if (user.isLoaded) {
+        return (
+            <React.Fragment>
+                <AddForm {...formProps} />
+            </React.Fragment>
+        );
+    } else {
+        return null;
+    }
 }
 
 const mapStateToProps = (state) => {
-    const { addQuestion } = state;
+    const { addQuestion, user } = state;
 
     return {
         options: addQuestion.options,
         msg: addQuestion.msg,
-        text: addQuestion.text
+        text: addQuestion.text,
+        user
     }
 };
 

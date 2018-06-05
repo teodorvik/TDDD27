@@ -29,7 +29,7 @@ function getQuestion(req, res) {
 function getAnsweredQuestions(req, res) {
     Question.find({
         answers: { $elemMatch: {
-            userid: res.userid
+            userid: res.locals.userid
         }}
     }).lean().exec((err, answeredQuestions) => {
             if (err) {
@@ -39,7 +39,7 @@ function getAnsweredQuestions(req, res) {
             for (let question of answeredQuestions) {
                 question.usersChoice = -1;
                 for (answer of question.answers) {
-                    if (answer.userid == res.userid) {
+                    if (answer.userid == res.locals.userid) {
                         question.usersChoice = answer.option;
                         break;
                     }
@@ -53,7 +53,7 @@ function getAnsweredQuestions(req, res) {
 function getUnansweredQuestions(req, res) {
     Question.find({
         answers: { $not: { $elemMatch: {
-            userid: res.userid
+            userid: res.locals.userid
         }}}
     }).exec((err, unansweredQuestions) => {
             if (err) {
@@ -68,7 +68,7 @@ function getUnansweredQuestions(req, res) {
 function getRandomQuestion(req, res) {
     Question.find({
         answers: { $not: { $elemMatch: {
-            userid: res.userid
+            userid: res.locals.userid
         }}}
     }).exec((err, unansweredQuestions) => {
             if (err) {
@@ -87,13 +87,13 @@ function addQuestion(req, res) {
         return;
     }
 
-    if(!res.userid) {
+    if(!res.locals.userid) {
         res.status(401).end();
         return;
     }
 
     const newQuestion = new Question({
-        userid: res.userid,
+        userid: res.locals.userid,
         text: req.body.question.text,
         options: req.body.question.options,
     });
@@ -108,7 +108,7 @@ function addQuestion(req, res) {
 };
 
 function deleteQuestion(req, res) {
-    Question.remove({ _id: req.params.id, userid: res.userid }).exec((err, result) => {
+    Question.remove({ _id: req.params.id, userid: res.locals.userid }).exec((err, result) => {
         if (err) {
             res.status(500).send(err);
             return;
@@ -124,16 +124,16 @@ function deleteQuestion(req, res) {
 };
 
 function addAnswer(req, res) {
-    if(!res.userid) {
+    if(!res.locals.userid) {
         res.status(401).end();
         return;
     }
 
-    console.log(res.userid);
+    console.log(res.locals.userid);
     Question.findOneAndUpdate(
         { _id: req.params.id },
         {
-            $pull: { answers: {userid: res.userid}  }
+            $pull: { answers: {userid: res.locals.userid}  }
         },
         {new: true}
     ).exec((err, question) => {
@@ -145,7 +145,7 @@ function addAnswer(req, res) {
         Question.findOneAndUpdate(
             { _id: req.params.id },
             {
-                $addToSet: {answers: {userid: res.userid, option: req.body.answer.option}}
+                $addToSet: {answers: {userid: res.locals.userid, option: req.body.answer.option}}
             },
             {new: true}
         ).exec((err, question) => {
@@ -159,7 +159,7 @@ function addAnswer(req, res) {
 };
 
 function deleteAnswer(req, res) {
-    if(!res.userid) {
+    if(!res.locals.userid) {
         res.status(401).end();
         return;
     }
@@ -167,7 +167,7 @@ function deleteAnswer(req, res) {
     Question.findOneAndUpdate(
         { _id: req.params.id },
         {
-            $pull: { answers: {userid: res.userid}  }
+            $pull: { answers: {userid: res.locals.userid}  }
         },
         {new: true}
     ).exec((err, question) => {

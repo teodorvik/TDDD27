@@ -1,7 +1,9 @@
 import {
     ADD_QUESTION_REQUEST,
     ADD_QUESTION_SUCCESS,
-    ADD_QUESTION_FAILED
+    ADD_QUESTION_FAILED,
+    SET_OPTIONS_VALUES,
+    SET_QUESTION_TEXT
 } from './actionConstants';
 
 import { addQuestionCall } from '../services/api';
@@ -27,5 +29,23 @@ export const addQuestionAction = (question) => {
         addQuestionCall(question)
             .then(response => dispatch(addQuestionSuccess(response)))
             .catch(error => dispatch(addQuestionFailed(error)));
+    }
+};
+
+export const setOptionsValues = (options) => {
+    return (dispatch) => {
+        dispatch({
+            type: SET_OPTIONS_VALUES,
+            payload: options
+        });
+    };
+};
+
+export const setText = (text) => {
+    return (dispatch) => {
+        dispatch({
+            type: SET_QUESTION_TEXT,
+            payload: text
+        });
     }
 }

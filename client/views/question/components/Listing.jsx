@@ -48,11 +48,11 @@ class Row extends Component {
                         {options[0]}
                     </span>
                 </div>
-                <div className='option-1-votes'>{data.value}</div>
+                <div className='option-1-votes'>{data[0].value}</div>
                 <div className='percentage'>
                     <Piechart data={data} />
                 </div>
-                <div className='option-2-votes'>{data.value}</div>
+                <div className='option-2-votes'>{data[1].value}</div>
                 <div className='option-2-text'>
                     <span className={`${data[1].usersChoice ? 'users-choice' : ''}`}>
                         {options[1]}

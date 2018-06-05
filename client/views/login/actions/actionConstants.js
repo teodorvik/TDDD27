@@ -1,0 +1,4 @@
+export const LOGIN_SUCCESS = 'GET_QUESTION_SUCCESS';
+export const LOGIN_FAILED = 'GET_QUESTION_FAILED';
+export const LOGOUT = 'LOGOUT';
+export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';

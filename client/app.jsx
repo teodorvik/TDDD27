@@ -9,13 +9,17 @@ import AnswerQuestion from './views/question/containers/AnswerQuestion';
 import CreateQuestion from './views/question/containers/CreateQuestion';
 import QuestionListing from './views/question/containers/QuestionListing';
 import Login from './views/login/containers/Login';
+import { authenticationAction } from './views/login/actions/loginActions';
 
 import './style.scss';
 
 import rootReducers from './rootReducers';
-const store = createStore(rootReducers, applyMiddleware(thunk));
+export const store = createStore(rootReducers, applyMiddleware(thunk));
 
 export default class App extends Component {
+  componentDidMount() {
+    store.dispatch(authenticationAction());
+  }
   render() {
     return (
       <Provider store={store}>

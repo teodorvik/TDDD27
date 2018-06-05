@@ -1,49 +1,39 @@
 import React, { Component } from 'react';
-import Auth from '../actions/Auth';
+import { connect } from 'react-redux';
+import {loginAction, logoutAction} from '../actions/loginActions';
 
 class Login extends Component {
     constructor(props) {
         super(props);
-
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
-        this.init = this.init.bind(this);
-
-        this.state = {
-            isLoggedIn: Auth.isAuthenticated(),
-            isLoaded: false,
-        };
-    }
-
-    componentDidMount() {
-        Auth.handleAuthentication(this.init); //TODO(Aron) Do in app.jsx or custom route instead?
-    }
-
-    init() {
-        this.setState({
-            isLoggedIn: Auth.isAuthenticated(),
-            isLoaded: true,
-        });
-    }
-
-    login() {
-        Auth.login();
-    }
-
-    logout() {
-        Auth.logout();
-        this.setState({isLoggedIn : false});
     }
 
     render() {
-        if (!this.state.isLoaded) {
-            return (<a>Loading</a>);
-        } else if (!this.state.isLoggedIn) {
-            return (<a onClick={this.login}>Login</a>);
+        const { user, login, logout } = this.props;
+        console.log("LOGGED IN: " + user.isLoggedIn);
+        console.log(localStorage.getItem('expires_at'));
+        if (!user.isLoggedIn) {
+            return (<a onClick={login}>Login</a>);
         } else {
-            return (<a onClick={this.logout}>Logout</a>);
+            return (<a onClick={logout}>Logout</a>);
         }
     }
 }
 
-export default Login;
+const mapStateToProps = state => {
+    const { user } = state;
+
+    return {
+        user
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    login: () => {
+        dispatch(loginAction());
+    },
+    logout: () => {
+        dispatch(logoutAction());
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

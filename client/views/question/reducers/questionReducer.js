@@ -11,10 +11,13 @@ import {
     SEND_ANSWER_REQUEST,
     SEND_ANSWER_SUCCESS,
     SEND_ANSWER_FAILED,
-    SET_FILTER_TEXT
+    SET_FILTER_TEXT,
+    SET_OPTIONS_VALUES,
+    SET_QUESTION_TEXT
 } from '../actions/actionConstants';
 
 export const questions = (state = [], action) => {
+    console.log('questions Reducer')
     switch (action.type) {
         case GET_QUESTIONS_SUCCESS:
             return [...action.payload];
@@ -23,15 +26,42 @@ export const questions = (state = [], action) => {
         case SEND_ANSWER_FAILED:
             console.warn(`${action.type}: ${action.payload}`);
             return state;
+
         case GET_QUESTIONS_REQUEST:
-        case ADD_QUESTION_REQUEST:
+
         case SEND_ANSWER_REQUEST:
-        case ADD_QUESTION_SUCCESS:
         case SEND_ANSWER_SUCCESS:
         default:
             return state;
     }
 };
+
+export const addQuestion = (state = { options: ["", ""], text: 'Would you rather' }, action) => {
+    switch (action.type) {
+        case SET_QUESTION_TEXT:
+            return {
+                options: [...state.options],
+                text: action.payload
+            }
+        case SET_OPTIONS_VALUES:
+            return {
+                text: state.text,
+                options: action.payload
+            }
+        case ADD_QUESTION_SUCCESS:
+            return {
+                text: 'Would you rather',
+                options: ["", ""],
+                msg: 'Question added!'
+            }
+        case ADD_QUESTION_REQUEST:
+        case ADD_QUESTION_FAILED:
+            console.warn(`${action.type}: ${action.payload}`);
+            return state;
+        default:
+            return state;
+    }
+}
 
 export const filterText = (state = '', action) => {
     switch (action.type) {

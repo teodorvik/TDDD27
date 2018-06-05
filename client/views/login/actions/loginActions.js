@@ -7,6 +7,7 @@ import {
 
 import auth0 from 'auth0-js';
 import jwt_decode from 'jwt-decode';
+import uuidv4 from 'uuid/v4';
 
 
 const auth = new auth0.WebAuth({
@@ -50,7 +51,7 @@ export const isAuthenticatedAction = () => {
 
 export const authenticationAction = () => {
     if (!localStorage.getItem('session_id')) {
-        let uuid = 'test';
+        let uuid = uuidv4();
         console.log(uuid);
         localStorage.setItem('session_id', uuid);
     }

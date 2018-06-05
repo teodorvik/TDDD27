@@ -25,7 +25,7 @@ export default class App extends Component {
                 <header>
                     <div className='title'>
                       <Link to='/'>
-                        < h1>WYRV</h1>
+                        <h1>WYRV</h1>
                           <p>// "Would you rather" visualized</p>
                       </Link>
                     </div>

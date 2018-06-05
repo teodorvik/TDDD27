@@ -15,7 +15,7 @@ router.use(function timeLog (req, res, next) {
 });
 
 router.use(function handleUserToken (req, res, next) {
-    res.locals.userId = false;
+    res.userid = false;
     const token = req.headers.authorization.replace('Bearer ', ''); //TODO(Aron) Check id token and stuff instead.
     if(!token) {
         next();
@@ -32,29 +32,28 @@ router.use(function handleUserToken (req, res, next) {
                 if (err) {
                     res.status(500).send(err);
                 }
-                res.locals.userId = saved._id;
+                res.userid = saved._id;
                 next();
             });
         } else {
-            res.locals.userId = user._id;
+            res.userid = user._id;
             next();
         }
     });
 });
 
-router.get(    '/questions',            controller.getQuestions);
-router.get(    '/questions/random',     controller.getRandomQuestion);
-router.get(    '/questions/answered',   controller.getAnsweredQuestions);
-router.get(    '/questions/unanswered', controller.getUnansweredQuestions);
-router.get(    '/questions/:id',        controller.getQuestion);
-router.post(   '/questions/',           controller.addQuestion);
-router.delete( '/questions/:id',        controller.deleteQuestion);
+router.get(    '/questions',              controller.getQuestions);
+router.get(    '/questions/random',       controller.getRandomQuestion);
+router.get(    '/questions/answered',     controller.getAnsweredQuestions);
+router.get(    '/questions/unanswered',   controller.getUnansweredQuestions);
+router.post(   '/questions/',             controller.addQuestion);
+router.get(    '/questions/:id',          controller.getQuestion);
+router.delete( '/questions/:id',          controller.deleteQuestion);
 
-router.get(    '/answers',              controller.getAnswers);
-router.get(    '/answers/:id',          controller.getAnswer);
-router.post(   '/answers/',             controller.addAnswer);
-router.delete( '/answers/:id',          controller.deleteAnswer);
+router.post(   '/questions/:id/answers/', controller.addAnswer);
+router.delete( '/questions/:id/answers',  controller.deleteAnswer);
 
+//TODO(Aron) This needs to removed or restricted if we go live with the site.
 router.get(    '/populate/:data',       init.populate);
 
 module.exports = router;

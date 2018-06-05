@@ -27,24 +27,19 @@ const Listing = ({ questions }) => {
 class Row extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            data: [
-                {
-                    usersChoice: false,
-                    value: Math.floor(Math.random() * 100)
-                },
-                {
-                    usersChoice: true,
-                    value: Math.floor(Math.random() * 100)
-                }
-            ]
-        }
     }
 
     render() {
-        const { options } = this.props;
-        const { data } = this.state;
+        const { options, answers, usersChoice } = this.props;
+        console.log(this.props);
+        const data = [{
+            value: answers.filter((x) => x.option == 0).length,
+            usersChoice: (usersChoice == 0)
+        },
+        {
+            value: answers.filter((x) => x.option == 1).length,
+            usersChoice: (usersChoice == 1)
+        }]
 
         return (
             <div className='row'>
@@ -53,11 +48,11 @@ class Row extends Component {
                         {options[0]}
                     </span>
                 </div>
-                <div className='option-1-votes'>{data[0].value}</div>
+                <div className='option-1-votes'>{data.value}</div>
                 <div className='percentage'>
                     <Piechart data={data} />
                 </div>
-                <div className='option-2-votes'>{data[1].value}</div>
+                <div className='option-2-votes'>{data.value}</div>
                 <div className='option-2-text'>
                     <span>
                         {options[1]}

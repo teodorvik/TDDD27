@@ -129,7 +129,6 @@ function addAnswer(req, res) {
         return;
     }
 
-    console.log(res.locals.userid);
     Question.findOneAndUpdate(
         { _id: req.params.id },
         {

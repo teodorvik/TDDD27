@@ -19,8 +19,6 @@ export class AnswerQuestion extends Component {
             return (
                 <Question {...question} selectOption={selectOption} />
             );
-        } else if (!question.isLoaded) {
-            return (<div>Loading...</div>);
         } else {
             return null;
         }

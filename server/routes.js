@@ -14,6 +14,7 @@ router.use(function timeLog (req, res, next) {
 
 
 router.use(auth.jwtCheck);
+router.use(auth.setGuestUserId);
 router.use(auth.setUserId);
 //router.use(auth.updateUser);
 

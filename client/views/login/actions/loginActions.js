@@ -7,6 +7,7 @@ import {
 
 import auth0 from 'auth0-js';
 import jwt_decode from 'jwt-decode';
+import uuidv4 from 'uuid/v4';
 
 
 const auth = new auth0.WebAuth({
@@ -52,14 +53,13 @@ export const isAuthenticatedAction = () => {
 }
 
 export const authenticationAction = () => {
-    if (!localStorage.getItem('session_id')) {
-        let uuid = 'test';
-        console.log(uuid);
-        localStorage.setItem('session_id', uuid);
-    }
-
     return (dispatch) => {
-        console.log('authenticationActoin hej')
+        if (!localStorage.getItem('session_id')) {
+            let uuid = uuidv4();
+            console.log(uuid);
+            localStorage.setItem('session_id', uuid);
+        }
+
         auth.parseHash((error, authResult) => {
             if (authResult && authResult.accessToken) {
                 history.replaceState({}, document.title, '/');
@@ -80,10 +80,11 @@ export const authenticationAction = () => {
 }
 
 export const logoutAction = (user) => {
-    console.log("LOGOUT");
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expires_at');
     return (dispatch) => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('expires_at');
+        location.reload();
+
         dispatch(logout());
     }
 }
